@@ -27,11 +27,7 @@ exports.gainers = async () => {
     const gainers = []
     const Loosers = []
     for (let symbol = 0; symbol < allSymbols.length; symbol++) {
-        if (gainers.length >= 10 && Loosers.length >= 10) {
-            gainers.sort((a, b) => b.pChange - a.pChange)
-            Loosers.sort((a, b) => a.pChange - b.pChange)
-            return { Loosers: [...Loosers], Gainers: [...gainers] }
-        }
+       
         const element = allSymbols[symbol];
         var data = await this.equity(element)
         if (data.pChange > 0) {
@@ -46,3 +42,7 @@ exports.gainers = async () => {
     return { Loosers: [...Loosers], Gainers: [...gainers] }
 }
 
+
+exports.endpo = async ()=>{
+   return await nseindia.getDataByEndpoint('/api/gainersAndLosers/nifty50')
+}

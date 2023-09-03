@@ -6,7 +6,7 @@ const TrendingMarkets = () => {
     const [Loosers, setLoosers] = useState([]);
 
     const TrendingM = async () => {
-        const url = process.env.REACT_APP_SERVER_URL+'/gainers'; // Use a relative URL
+        const url = 'http://localhost:3000/api/gainersAndLosers/nifty50'; // Use a relative URL
         try {
             const response = await axios.get(url);
             const data = response.data; // Assuming the API returns an object with gainers and losers arrays

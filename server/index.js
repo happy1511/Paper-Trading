@@ -3,7 +3,7 @@ var express = require('express')
 var app = express()
 var cors = require('cors')
 var port = process.env.PORT || 8000
-const {equity,gainers,getEquityHistoricalData, getAllSymbols } = require('./nseapi/allstock') 
+const {endpo,equity,gainers,getEquityHistoricalData, getAllSymbols } = require('./nseapi/allstock') 
 
 app.use(cors())
 
@@ -29,4 +29,8 @@ app.get('/gainers',async (req,res)=>{
 
 app.get('/equity/:symbol',async (req,res)=>{
     res.send(await equity(req.params.symbol))
+})
+
+app.get('/new',async (req,res)=>{
+    res.send(await endpo())
 })
