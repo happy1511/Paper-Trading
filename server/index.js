@@ -3,7 +3,7 @@ var express = require('express')
 var app = express()
 var cors = require('cors')
 var port = process.env.PORT || 8000
-const {getEquityHistoricalData,intraday,endpo,equity,gainers,getEquityHistoricalData, getAllSymbols } = require('./nseapi/allstock') 
+const {intraday,endpo,equity,gainers,getEquityHistoricalData, getAllSymbols } = require('./nseapi/allstock') 
 
 app.use(cors())
 

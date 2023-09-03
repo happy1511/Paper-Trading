@@ -32,12 +32,12 @@ const StockDataWithChart = () => {
     //         console.log(error)
     //     }
     // }
-    const handleselectchart = (e) => {
+    const handleselectchart = (e) => { 
         setselectedchart(e)
     }
     // useEffect(() => {
     //     FetchMarketStatus();
-    // })
+    // }) 
     useEffect(() => {
         fetchSymbolData();
         const interval = setInterval(() => {
