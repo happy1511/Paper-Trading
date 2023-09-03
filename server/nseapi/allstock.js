@@ -18,27 +18,31 @@ exports.news = () => {
     })
 }
 
-exports.equity=()=>{
-    return nseindia.getEquityDetails('ADANIENT')
+exports.equity = (symbol) => {
+    return nseindia.getEquityDetails(symbol)
 }
 
 exports.gainers = async () => {
-    const allSymbols =await this.getAllSymbols()
+    const allSymbols = await this.getAllSymbols()
     const gainers = []
     const Loosers = []
     for (let symbol = 0; symbol < allSymbols.length; symbol++) {
+        if (gainers.length >= 10 && Loosers.length >= 10) {
+            gainers.sort((a, b) => b.pChange - a.pChange)
+            Loosers.sort((a, b) => a.pChange - b.pChange)
+            return { Loosers: [...Loosers], Gainers: [...gainers] }
+        }
         const element = allSymbols[symbol];
         var data = await this.equity(element)
-        if (data.pChange > 0){
+        if (data.pChange > 0) {
             gainers.push(data)
         }
-        else{
+        else {
             Loosers.push(data)
         }
     }
-    gainers.sort((a,b)=>b.pChange - a.pChange)
-    Loosers.sort((a,b)=>a.pChange - b.pChange)
-
-    return {Loosers:[...Loosers],Gainers:[...gainers]}
+    gainers.sort((a, b) => b.pChange - a.pChange)
+    Loosers.sort((a, b) => a.pChange - b.pChange)
+    return { Loosers: [...Loosers], Gainers: [...gainers] }
 }
 

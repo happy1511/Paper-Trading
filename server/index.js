@@ -27,8 +27,6 @@ app.get('/gainers',async (req,res)=>{
     res.send(await gainers())
 })
 
-app.get('/equity',async (req,res)=>{
-    const data = await equity()
-    res.send(data.length)
-    console.log(data)
+app.get('/equity/:symbol',async (req,res)=>{
+    res.send(await equity(req.params.symbol))
 })

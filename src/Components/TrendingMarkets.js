@@ -10,12 +10,13 @@ const TrendingMarkets = () => {
         try {
             const response = await axios.get(url);
             const data = response.data; // Assuming the API returns an object with gainers and losers arrays
-
+            console.log(response)
             setGainers(data.Gainers);
             setLoosers(data.Loosers);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
+        
     };
 
     useEffect(() => {
