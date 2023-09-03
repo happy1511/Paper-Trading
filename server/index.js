@@ -39,9 +39,9 @@ app.get('/intraday/:symbol', async (req, res) => {
     res.send(await intraday(req.params.symbol))
 })
 
-// app.get('/historical/:symbol/:startdate/:enddate', async (req, res) => {
-//     res.send(await HistoricalData(req.params.symbol, {
-//         start: new Date(req.params.startdate),
-//         end: new Date(req.params.enddate)
-//     }))
-// })
+app.get('/historical/:symbol/:start/:end', async (req, res) => {
+    res.send(await HistoricalData(req.params.symbol, {
+        start: new Date(req.params.start),
+        end: new Date(req.params.end)
+    }))
+})
