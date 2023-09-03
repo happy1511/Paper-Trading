@@ -32,6 +32,8 @@ font-family: 'Ubuntu', sans-serif; */
     flex-direction: column;
     box-shadow: rgba(255, 255, 255, 0.35) 0px 0px 4px 0px;
     background-color: transparent;
+    max-height: 400px;
+    overflow: hidden;
 }
 
 .CardsN:hover{
