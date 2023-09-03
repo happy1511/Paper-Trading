@@ -3,7 +3,8 @@ var express = require('express')
 var app = express()
 var cors = require('cors')
 var port = process.env.PORT || 8000
-const {intraday,endpo,equity,gainers,getEquityHistoricalData, getAllSymbols } = require('./nseapi/allstock') 
+const { HistoricalData, intraday, endpo, equity, gainers, getEquityHistoricalData, getAllSymbols } = require('./nseapi/allstock')
+const { json } = require('react-router-dom')
 
 app.use(cors())
 
@@ -23,19 +24,25 @@ app.get('/ADANIENT', async (req, res) => {
     res.send(await getEquityHistoricalData())
 })
 
-app.get('/gainers',async (req,res)=>{
+app.get('/gainers', async (req, res) => {
     res.send(await gainers())
 })
 
-app.get('/equity/:symbol',async (req,res)=>{
+app.get('/equity/:symbol', async (req, res) => {
     res.send(await equity(req.params.symbol))
 })
 
-app.get('/new',async (req,res)=>{
+app.get('/new', async (req, res) => {
     res.send(await endpo())
 })
 
-app.get('/intraday/:symbol', async (req,res)=>{
+app.get('/intraday/:symbol', async (req, res) => {
     res.send(await intraday(req.params.symbol))
 })
 
+app.get('/historical/:symbol/:startdate/:enddate', async (req, res) => {
+    res.send(await HistoricalData(req.params.symbol, {
+        start: new Date(req.params.startdate),
+        end: new Date(req.params.enddate)
+    }))
+})

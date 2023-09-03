@@ -51,3 +51,6 @@ exports.intraday = (symbol) => {
     return nseindia.getEquityIntradayData(symbol,false)
 }
 
+exports.HistoricalData = (symbol,range) => {
+    return nseindia.getEquityHistoricalData(symbol,range)
+}

@@ -108,7 +108,7 @@ const ChartR = (props) => {
                 var formattedCurrentDate = formatDateToYYYYMMDD(currentDate);
                 var formattedFiveDaysAgo = formatDateToYYYYMMDD(fiveDaysAgo);
                 try {
-                    const response = await axios.get(`/api/equity/historical/adanient?dateStart=${formattedFiveDaysAgo}&dateEnd=${formattedCurrentDate}`);
+                    const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/historical/${props.data}/${formattedCurrentDate}/${formattedFiveDaysAgo}`);
                     setstockprice(response.data[0].data);
                 } catch (error) {
                     console.log(error);
