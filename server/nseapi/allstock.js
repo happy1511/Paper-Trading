@@ -50,3 +50,5 @@ exports.endpo = async ()=>{
 exports.intraday = (symbol) => {
     return nseindia.getEquityIntradayData(symbol,false)
 }
+
+exports.getEquityHistoricalData = ()

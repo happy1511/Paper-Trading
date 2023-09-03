@@ -15,7 +15,7 @@ const StockDataWithChart = () => {
 
     const fetchSymbolData = async () => {
         try {
-            const response = await axios.get(`/api/equity/${Symbol}`);
+            const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/equity/${Symbol}`);
             setSymboldata(response.data);
         } catch (error) {
             console.log(error);
@@ -24,20 +24,20 @@ const StockDataWithChart = () => {
     useEffect(()=>{
         (Symboldata.priceInfo?.pChange < 0) ? setcolor('red') : setcolor('green')
     },[Symboldata])
-    const FetchMarketStatus = async () => {
-        try {
-            const response = await axios.get('/api/marketStatus');
-            response.data.marketState[0].marketStatus === 'Close' ? setMarketStatus(0) : setMarketStatus(1)
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    // const FetchMarketStatus = async () => {
+    //     try {
+    //         const response = await axios.get('/api/marketStatus');
+    //         response.data.marketState[0].marketStatus === 'Close' ? setMarketStatus(0) : setMarketStatus(1)
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
     const handleselectchart = (e) => {
         setselectedchart(e)
     }
-    useEffect(() => {
-        FetchMarketStatus();
-    })
+    // useEffect(() => {
+    //     FetchMarketStatus();
+    // })
     useEffect(() => {
         fetchSymbolData();
         const interval = setInterval(() => {

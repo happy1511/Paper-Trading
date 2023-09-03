@@ -84,7 +84,7 @@ const ChartR = (props) => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get(`/api/equity/intraday/${props.data}?preOpen=false`);
+                const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/intraday/${props.data}`);
                 setstockprice(response.data.grapthData);  
                 (stockprice[0][1] > stockprice[stockprice.length-1][1])?setColor('red'):setColor('green')
                 // Build the chart using the updated stockprice
