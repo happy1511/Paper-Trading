@@ -11,9 +11,8 @@ exports.getEquityHistoricalData = () => {
     return nseindia.getEquityStockIndices('NIFTY50')
 }
 
-exports.news = async () => {
-    console.log('ok')
-    await axios.get('https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=aa645100abd64084b8f46be432b080b7').then(res => {
+exports.news =  () => {
+    axios.get('https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=aa645100abd64084b8f46be432b080b7').then(res => {
         return res
     }).catch(err => {
         return err

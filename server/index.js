@@ -20,6 +20,6 @@ app.get('/ADANIENT', async (req, res) => {
     res.send(await getEquityHistoricalData())
 })
 
-app.get('/news', (req,res)=>{
-    res.send(news())
+app.get('/news',async (req,res)=>{
+    res.send(await news())
 })
