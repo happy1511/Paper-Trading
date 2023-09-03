@@ -46,3 +46,7 @@ exports.gainers = async () => {
 exports.endpo = async ()=>{
    return await nseindia.getDataByEndpoint('/api/gainersAndLosers/nifty50')
 }
+
+exports.intraday = (symbol) => {
+    return nseindia.getEquityIntradayData(symbol,false)
+}
