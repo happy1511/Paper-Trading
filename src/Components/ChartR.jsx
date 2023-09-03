@@ -86,7 +86,7 @@ const ChartR = (props) => {
             try {
                 const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/intraday/${props.data}`);
                 setstockprice(response.data.grapthData);  
-                (stockprice[0][1] > stockprice[stockprice.length-1][1])?setColor('red'):setColor('green')
+                // (stockprice[0][1] > stockprice[stockprice.length-1][1])?setColor('red'):setColor('green')
                 // Build the chart using the updated stockprice
             } catch (error) {
                 console.error(error);
@@ -108,7 +108,7 @@ const ChartR = (props) => {
                 var formattedCurrentDate = formatDateToYYYYMMDD(currentDate);
                 var formattedFiveDaysAgo = formatDateToYYYYMMDD(fiveDaysAgo);
                 try {
-                    const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/historical/${props.data}/${formattedCurrentDate}/${formattedFiveDaysAgo}`);
+                    const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/historical/${props.data}/${formattedFiveDaysAgo}/${formattedCurrentDate}`);
                     setstockprice(response.data[0].data);
                 } catch (error) {
                     console.log(error);
@@ -125,8 +125,9 @@ const ChartR = (props) => {
                 var formattedCurrentDate = formatDateToYYYYMMDD(currentDate);
                 var formattedFiveDaysAgo = formatDateToYYYYMMDD(fiveDaysAgo);
                 try {
-                    const response = await axios.get(`/api/equity/historical/adanient?dateStart=${formattedFiveDaysAgo}&dateEnd=${formattedCurrentDate}`);
+                    const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/historical/${props.data}/${formattedFiveDaysAgo}/${formattedCurrentDate}`);
                     setstockprice(response.data[0].data);
+                    console.log(response)
                     console.log(stockprice)
                 } catch (error) {
                     console.log(error);
@@ -143,10 +144,11 @@ const ChartR = (props) => {
                 var formattedCurrentDate = formatDateToYYYYMMDD(currentDate);
                 var formattedFiveDaysAgo = formatDateToYYYYMMDD(fiveDaysAgo);
                 try {
-                    const response = await axios.get(`/api/equity/historical/adanient?dateStart=${formattedFiveDaysAgo}&dateEnd=${formattedCurrentDate}`);
+                    const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/historical/${props.data}/${formattedFiveDaysAgo}/${formattedCurrentDate}`);
                     setstockprice(response.data[0].data);
+                    console.log(response)
                     console.log(stockprice)
-                    console.log(stockprice[0].CH_CLOSING_PRICE > stockprice[stockprice.length - 1].CH_CLOSING_PRICE)
+                    // console.log(stockprice[0].CH_CLOSING_PRICE > stockprice[stockprice.length - 1].CH_CLOSING_PRICE)
                      
                 } catch (error) {
                     console.log(error);
@@ -154,9 +156,7 @@ const ChartR = (props) => {
             }
         }
         FetchDate()
-        setInterval(() => {
-            FetchDate()
-        }, 5000);
+           
         // Clean up function to destroy the chart instance when the component unmounts
 
     }, [props.historical]);
@@ -177,13 +177,12 @@ const ChartR = (props) => {
     }, [stockprice]);
     useEffect(()=>{
         if (props.historical !== 0){
-            (stockprice[0].CH_CLOSING_PRICE > stockprice[stockprice.length - 1].CH_CLOSING_PRICE) ? setColor('red') : setColor('green')
+            // (stockprice[0].CH_CLOSING_PRICE > stockprice[stockprice.length - 1].CH_CLOSING_PRICE) ? setColor('red') : setColor('green')
         }
         else{
             
         }
     },[stockprice])
-    console.log(stockprice.priceInfo?.pChange)
 
     return (
 

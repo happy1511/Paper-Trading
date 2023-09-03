@@ -40,8 +40,7 @@ app.get('/intraday/:symbol', async (req, res) => {
 })
 
 function increaseTimeout(req, res, next) {
-    // Set the timeout to 60 seconds (adjust as needed)
-    req.setTimeout(180000); // 60 seconds in milliseconds
+    req.setTimeout(180000);
     next();
 }
 
