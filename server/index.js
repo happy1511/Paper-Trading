@@ -39,7 +39,13 @@ app.get('/intraday/:symbol', async (req, res) => {
     res.send(await intraday(req.params.symbol))
 })
 
-app.get('/historical/:symbol/:start/:end', async (req, res) => {
+function increaseTimeout(req, res, next) {
+    // Set the timeout to 60 seconds (adjust as needed)
+    req.setTimeout(180000); // 60 seconds in milliseconds
+    next();
+}
+
+app.get('/historical/:symbol/:start/:end', increaseTimeout, async (req, res) => {
     res.send(await HistoricalData(req.params.symbol, {
         start: new Date(req.params.start),
         end: new Date(req.params.end)
