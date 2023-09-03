@@ -126,3 +126,29 @@
         
     
 }
+
+
+@media screen and (max-width:1024px) {
+ .SymbolNameDivChartPage{
+    padding: 0 0;
+ }   
+ .ChartDaySelectDiv{
+    padding-left: 0;
+    width: 100%;
+ }
+ .ChartDivChartPage{
+    padding-left: 0;
+    width: 100%;
+ }
+}
+
+@media screen and (max-width:425px) {
+    .ChartPageOuter{
+        padding-left: 0;
+        padding-right: 0;
+        min-width: 320px;
+    }
+    .PriceChangeChartPage{
+        font-size: small;
+    }
+}
