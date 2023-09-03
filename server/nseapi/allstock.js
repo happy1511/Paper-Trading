@@ -27,7 +27,7 @@ exports.gainers = async () => {
     const gainers = []
     const Loosers = []
     for (let symbol = 0; symbol < allSymbols.length; symbol++) {
-       
+
         const element = allSymbols[symbol];
         var data = await this.equity(element)
         if (data.pChange > 0) {
@@ -43,14 +43,30 @@ exports.gainers = async () => {
 }
 
 
-exports.endpo = async ()=>{
-   return await nseindia.getDataByEndpoint('/api/gainersAndLosers/nifty50')
-}
+exports.endpo = async () => {
+    try {
+        https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=aa645100abd64084b8f46be432b080b7
+        var apiKey = 'aa645100abd64084b8f46be432b080b7'; // Replace with your NewsAPI API key
+        var apiUrl = 'https://newsapi.org/v2/top-headlines?country=us';
+        var { data } = await axios.get(apiUrl, {
+            params: {
+                apiKey,
+            },
+        });
+
+       return (data);
+    } catch (error) {
+        console.error(error);
+        return ({ error: 'Internal Server Error' });
+    }
+};
+
+
 
 exports.intraday = (symbol) => {
-    return nseindia.getEquityIntradayData(symbol,false)
+    return nseindia.getEquityIntradayData(symbol, false)
 }
 
-exports.HistoricalData = (symbol,range) => {
-    return nseindia.getEquityHistoricalData(symbol,range)
+exports.HistoricalData = (symbol, range) => {
+    return nseindia.getEquityHistoricalData(symbol, range)
 }

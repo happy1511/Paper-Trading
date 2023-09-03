@@ -31,7 +31,7 @@ app.get('/equity/:symbol', async (req, res) => {
     res.send(await equity(req.params.symbol))
 })
 
-app.get('/new', async (req, res) => {
+app.get('/news', async (req, res) => {
     res.send(await endpo())
 })
 
