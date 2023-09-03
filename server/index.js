@@ -1,8 +1,11 @@
 
 var express = require('express')
 var app = express()
+var cors = require('cors')
 var port = process.env.PORT || 3001
 const {news,getEquityHistoricalData, getAllSymbols } = require('./nseapi/allstock') 
+
+app.use(cors())
 
 app.get('/', (req, res) => {
     res.send("hello world")
