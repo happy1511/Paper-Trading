@@ -32,7 +32,7 @@ const NewsStocks = () => {
 
     useEffect(() => {
         const fetchNewsData = async () => {
-            const url = 'https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=aa645100abd64084b8f46be432b080b7';
+            const url = `${process.env.REACT_APP_SERVER_URL}/news`;
 
             try {
                 const response = await fetch(url);
