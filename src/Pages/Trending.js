@@ -34,7 +34,7 @@ const Trending = () => {
     return Math.floor(screenWidth / (cardWidth + gap));
   }
   const fetchindices = () => {
-    const url = '/api/allIndices'
+    const url = `${process.env.REACT_APP_SERVER_URL}/Allindices`
     axios.get(url).then((res) => {
       setAllindices(res.data.data)
       setselectedindices(res.data.data[0].indexSymbol)

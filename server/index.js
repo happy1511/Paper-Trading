@@ -3,7 +3,7 @@ var express = require('express')
 var app = express()
 var cors = require('cors')
 var port = process.env.PORT || 8000
-const {data, HistoricalData, intraday, endpo, equity, gainers, getEquityHistoricalData, getAllSymbols, marketstatus } = require('./nseapi/allstock')
+const {AllTheIndices, HistoricalData, intraday, endpo, equity, gainers, getEquityHistoricalData, getAllSymbols, marketstatus } = require('./nseapi/allstock')
 
 app.use(cors())
 
@@ -54,3 +54,7 @@ app.get('/historical/:symbol/:start/:end', increaseTimeout, async (req, res) => 
 // app.get('/data',async (req,res)=>{
 //     res.send(await data())
 // })
+
+app.get('/Allindices', async (req,res) => {
+    res.json(await AllTheIndices())
+})

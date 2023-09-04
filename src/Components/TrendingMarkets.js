@@ -41,42 +41,38 @@ const TrendingMarkets = () => {
             //     console.error('Error fetching data:', error);
             // }
 
-            try {
-                const allsymboldata = await axios.get(`${process.env.REACT_APP_SERVER_URL}/getAllSymbols`)
-                const allsymboldata1 = allsymboldata.data
-                setallsymbols(allsymboldata1)
-                console.log(allsymboldata1)
-                var newgainers = {}
-                var newLoosers = {}
-                for (var i = 0; i < allSymbols.length; i++) {
-                    try {
-                        const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/equity/${allSymbols[i]}`)
-                        const resdata = response.data
-                        if (resdata.priceInfo.pChange >= 0) {
-                            newgainers[allSymbols[i]] = resdata
-                        }
-                        else {
-                            newLoosers[allSymbols[i]] = resdata
-                        }
-                    } catch (error) { console.log(error) }
-                    console.log(newLoosers)
-                    console.log(newgainers)
-                }
-                setGainers(newgainers)
-                setLoosers(newLoosers)
-            } catch (error) { console.log(error) }
+
+            setallsymbols((localStorage.getItem('AllSymbols')).split(','))
+            console.log(allSymbols)
+            var newgainers = {}
+            var newLoosers = {}
+            for (var i = 0; i < allSymbols.length; i++) {
+                try {
+                    const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/equity/${allSymbols[i]}`)
+                    const resdata = response.data
+                    if (resdata.priceInfo.pChange >= 0) {
+                        newgainers[allSymbols[i]] = resdata
+                    }
+                    else {
+                        newLoosers[allSymbols[i]] = resdata
+                    }
+                } catch (error) { console.log(error) }
+                console.log(i)
+            }
+            console.log(newgainers)
+            console.log(newLoosers)
+            setGainers(newgainers)
+            setLoosers(newLoosers)
+            console.log(Gainers)
+            console.log(Loosers)
 
         };
         TrendingM(); // Fetch data immediately when component mounts
-        const interval = setInterval(() => {
-            TrendingM()
-        }, 5000);
+        
         // const interval = setInterval(() => {
         //     TrendingM(); // Fetch data every 3 seconds
         // }, 3000);
-        return () => {
-            clearInterval(interval); // Clean up interval on component unmount
-        };
+        
     }, []);
     return (
         <>

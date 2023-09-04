@@ -77,3 +77,7 @@ exports.HistoricalData = (symbol, range) => {
 exports.marketstatus = () => {
     return nseindia.getDataByEndpoint('/api/marketStatus')
 }
+
+exports.AllTheIndices = () => {
+    return nseindia.getDataByEndpoint('/api/allIndices')
+}
