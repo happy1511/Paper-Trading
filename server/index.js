@@ -3,18 +3,25 @@ var express = require('express')
 var app = express()
 var cors = require('cors')
 var port = process.env.PORT || 8000
-const {topgainersandloosers,AllTheIndices, HistoricalData, intraday, endpo, equity, gainers, getEquityHistoricalData, getAllSymbols, marketstatus } = require('./nseapi/allstock')
+const { topgainersandloosers, AllTheIndices, HistoricalData, intraday, endpo, equity, gainers, getEquityHistoricalData, getAllSymbols, marketstatus } = require('./nseapi/allstock')
 var topgainersandlooser = []
 app.use(cors())
 
-app.get('/',async (req, res) => {
+app.get('/', async (req, res) => {
     res.json(await marketstatus())
 });
 
 app.listen(port, () => {
     console.log(`server is listening port ${port}`)
-    topgainersandlooser = topgainersandloosers()
-    console.log(topgainersandlooser)
+    const topgainesandloose = async () => {
+        const allSymbols = await nseindia.getAllStockSymbols()
+        for (var i = 0; i < allSymbols.length; i++) {
+            var equitydata = await nseindia.getEquityDetails(allSymbols[i]);
+            topgainersandlooser.push(equitydata)
+        }
+        return topgainersandlooser.sort((a, b) => { a.priceInfo.pChange - b.priceInfo.pChange })
+    }
+    topgainesandloose();
 })
 
 app.get('/getAllSymbols', async (req, res) => {
@@ -57,7 +64,7 @@ app.get('/historical/:symbol/:start/:end', increaseTimeout, async (req, res) => 
 //     res.send(await data())
 // })
 
-app.get('/Allindices', async (req,res) => {
+app.get('/Allindices', async (req, res) => {
     res.json(await AllTheIndices())
 })
 

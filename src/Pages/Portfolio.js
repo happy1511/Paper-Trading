@@ -22,10 +22,9 @@ const Portfolio = () => {
       setPortFolioValue(res.val().availableMoney)
     }) : ''
   }
-  auth.currentUser ? useEffect(() => {
+  useEffect(() => {
     Portfoliovaluefetch();
-  }) : ''
-
+  })
   const handleSectionselection = (e) => {
     if ((Number(sectionSelection) === Number(e))) {
     } else {
