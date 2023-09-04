@@ -11,14 +11,14 @@ font-family: 'Ubuntu', sans-serif; */
 
 .NewsOuter{
     height: 100%;
-    max-height: 400px;
+    max-height: 500px;
     width: 100%;
     background-color: black;
 }
 
 .LinkNews{
     font-family: var(--font);
-    max-height: 400px;
+    max-height: 500px;
 }
 
 .CardsN{
@@ -33,7 +33,7 @@ font-family: 'Ubuntu', sans-serif; */
     flex-direction: column;
     box-shadow: rgba(255, 255, 255, 0.35) 0px 0px 4px 0px;
     background-color: transparent;
-    max-height: 400px;
+    max-height: 500px;
     overflow: hidden;
 }
 

@@ -24,14 +24,16 @@ const StockDataWithChart = () => {
     useEffect(()=>{
         (Symboldata.priceInfo?.pChange < 0) ? setcolor('red') : setcolor('green')
     },[Symboldata])
-    // const FetchMarketStatus = async () => {
-    //     try {
-    //         const response = await axios.get('/api/marketStatus');
-    //         response.data.marketState[0].marketStatus === 'Close' ? setMarketStatus(0) : setMarketStatus(1)
-    //     } catch (error) {
-    //         console.log(error)
-    //     }
-    // }
+     const FetchMarketStatus = async () => {
+         try {
+             const response = await axios.get('http://localhost:8000/');
+             console.log(response)
+             response.data.marketState[0].marketStatus === 'Closed' ? setMarketStatus(0) : setMarketStatus(1)
+             console.log(MarketStatus)
+        } catch (error) {
+             console.log(error)
+         }
+     }
     const handleselectchart = (e) => { 
         setselectedchart(e)
     }
@@ -39,6 +41,7 @@ const StockDataWithChart = () => {
     //     FetchMarketStatus();
     // }) 
     useEffect(() => {
+        FetchMarketStatus();
         fetchSymbolData();
         const interval = setInterval(() => {
             fetchSymbolData();

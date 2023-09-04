@@ -37,15 +37,14 @@ exports.gainers = async () => {
             Loosers.push(data)
         }
     }
-    gainers.sort((a, b) => b.pChange - a.pChange)
-    Loosers.sort((a, b) => a.pChange - b.pChange)
+    gainers.sort((a, b) => b.priceInfo.pChange - a.priceInfo.pChange)
+    Loosers.sort((a, b) => a.priceInfo.pChange - b.priceInfo.pChange)
     return { Loosers: [...Loosers], Gainers: [...gainers] }
 }
 
 
 exports.endpo = async () => {
     try {
-        https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=aa645100abd64084b8f46be432b080b7
         var apiKey = 'aa645100abd64084b8f46be432b080b7'; // Replace with your NewsAPI API key
         var apiUrl = 'https://newsapi.org/v2/top-headlines?country=us';
         var { data } = await axios.get(apiUrl, {
@@ -69,4 +68,12 @@ exports.intraday = (symbol) => {
 
 exports.HistoricalData = (symbol, range) => {
     return nseindia.getEquityHistoricalData(symbol, range)
+}
+
+// exports.data = ()=>{
+//     return nseindia.getDataByEndpoint('/top-gainers-loosers')
+// }
+
+exports.marketstatus = () => {
+    return nseindia.getDataByEndpoint('/api/marketStatus')
 }
