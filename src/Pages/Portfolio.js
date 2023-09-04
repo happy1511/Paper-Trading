@@ -18,13 +18,13 @@ const Portfolio = () => {
   const [sectionSelection, setsectionSelection] = useState(0)
 
   const Portfoliovaluefetch = () => {
-    onValue(ref(db, 'users/' + auth.currentUser.uid + '/portfolio'), (res) => {
+    auth.currentUser ? onValue(ref(db, 'users/' + auth.currentUser.uid + '/portfolio'), (res) => {
       setPortFolioValue(res.val().availableMoney)
-    })
+    }) : ''
   }
-  useEffect(() => {
+  auth.currentUser ? useEffect(() => {
     Portfoliovaluefetch();
-  })
+  }) : ''
 
   const handleSectionselection = (e) => {
     if ((Number(sectionSelection) === Number(e))) {
