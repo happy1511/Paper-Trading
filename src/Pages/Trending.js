@@ -42,49 +42,52 @@ const Trending = () => {
       console.error(err)
     })
   }
-  const fetchselected = () => {
-    const url = '/api/mostActive/' + selectedindices.toLowerCase()
-    axios.get(url).then((res) => {
-      setbyVolume(res.data.byVolume)
-      setbyValue(res.data.byValue)
-    }).catch((err) => {
-      console.error(err)
-    })
-  }
+  // const fetchselected = () => {
+  //   const url = '/api/mostActive/' + selectedindices.toLowerCase()
+  //   axios.get(url).then((res) => {
+  //     setbyVolume(res.data.byVolume)
+  //     setbyValue(res.data.byValue)
+  //   }).catch((err) => {
+  //     console.error(err)
+  //   })
+  // }
 
-  const fetchGL = () => {
-    const surl = '/api/gainersAndLosers/' + selectedIndicesTopGL.toLowerCase()
-    axios.get(surl).then((res) => {
-      setgainers(res.data.gainers)
-      setLoosers(res.data.losers)
-    }).catch((err) => {
-      console.error(err)
-    })
-  }
-  const handleindiceschange = (e) => {
-    setselectedindices(e.target.value)
-  }
-  const handleindiceschangeTopGL = (e) => {
-    setselectedIndicesTopGL(e.target.value)
-  }
-  useEffect(() => {
+  // const fetchGL = () => {
+  //   const surl = '/api/gainersAndLosers/' + selectedIndicesTopGL.toLowerCase()
+  //   axios.get(surl).then((res) => {
+  //     setgainers(res.data.gainers)
+  //     setLoosers(res.data.losers)
+  //   }).catch((err) => {
+  //     console.error(err)
+  //   })
+  // }
+  // const handleindiceschange = (e) => {
+  //   setselectedindices(e.target.value)
+  // }
+  // const handleindiceschangeTopGL = (e) => {
+  //   setselectedIndicesTopGL(e.target.value)
+  // }
+  // useEffect(() => {
+  //   fetchindices();
+  //   fetchselected();
+  //   fetchGL();
+
+  //   setInterval ( () => {
+  //     fetchselected();
+  //     fetchGL();
+  //   },1000)
+  // }, [])
+
+  // useEffect(() => {
+  //   fetchselected();
+  // }, [selectedindices])
+
+  // useEffect(() => {
+  //   fetchGL();
+  // }, [selectedIndicesTopGL])
+  useEffect(()=>{
     fetchindices();
-    fetchselected();
-    fetchGL();
-
-    setInterval ( () => {
-      fetchselected();
-      fetchGL();
-    },1000)
-  }, [])
-
-  useEffect(() => {
-    fetchselected();
-  }, [selectedindices])
-
-  useEffect(() => {
-    fetchGL();
-  }, [selectedIndicesTopGL])
+  })
   return (
     <>
       <Header />
@@ -107,7 +110,7 @@ const Trending = () => {
 
           </Splide>
         </div>
-        <h2 className='TrendingPageHeaders'>Most Active Stocks</h2>
+        {/* <h2 className='TrendingPageHeaders'>Most Active Stocks</h2>
         <select name="" id="" className='optionIndices' onChange={handleindiceschange}>
           {Allindices.map((data) => {
             return (
@@ -193,7 +196,7 @@ const Trending = () => {
               })
             }
           </Splide>
-        </div>
+        </div> */}
 
       </div >
       <Footer />
