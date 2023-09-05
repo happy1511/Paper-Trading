@@ -19,7 +19,7 @@ exports.equity = (symbol) => {
 exports.news = async () => {
     try {
         var apiKey = 'aa645100abd64084b8f46be432b080b7'; // Replace with your NewsAPI API key
-        var apiUrl = 'https://newsapi.org/v2/top-headlines?country=us';
+        var apiUrl = 'https://newsapi.org/v2/top-headlines?country=in';
         var { data } = await axios.get(apiUrl, {
             params: {
                 apiKey,

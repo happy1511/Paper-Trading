@@ -45,15 +45,16 @@ const NewsStocks = () => {
             }
         };
         fetchNewsData();
+        console.log(newsData)
     }, []);
     // const g = (JSON.parse(result)).data.main.stream
     return (
         <>
             {
-                newsData.map((v,index) => {
+                newsData.map((v,index) => { 
                     const handle = v
                     return (
-                        handle?<>
+                        handle.source.id?<>
                         <a href={v.url} className='LinkNews' key={index}>
                             <div className="CardsN" key={index+newsData.length}>
                                 <div className="imgNews" key={index+newsData.length+newsData.length}>
