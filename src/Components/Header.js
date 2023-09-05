@@ -15,15 +15,20 @@ import { auth } from '../utilities/Firebase';
 const Header = () => {
     // const [activePill, setActivePill] = useActivePill()
     var open = 0
-    const toggleMenu = () => {
+    const toggleMenu = (e) => {
         const tag = document.getElementById('Menu')
         if (open === 0) {
             tag.style.display = "inline-block";
             open = 1
         }
         else {
-            tag.style.display = "none"
-            open = 0
+            console.log(e)
+            if (e.relatedTarget?.id !== "MenuLink" && e.relatedTarget?.id !== "Menu") {
+                console.log(1)
+                tag.style.display = "none"
+                open = 0
+            }
+            console.log(tag.style.display.valueOf())
         }
     }
     const [isHeaderBlack, setIsHeaderBlack] = useState(false);
@@ -47,7 +52,7 @@ const Header = () => {
         };
     }, []);
 
-   
+
     //
     //
     //
@@ -84,21 +89,21 @@ const Header = () => {
                     </div>
 
                     <div className="NavbarMenuDiv" id='Menu'>
-                        <ul className="NavbarMenuUl">
-                            <li className={`NavbarMenuLi `}>
-                                <Link className='NavbarMenuLinks' to='/'>Home</Link>
+                        <ul className="NavbarMenuUl" id='MenuLink'>
+                            <li className={`NavbarMenuLi `} id='MenuLink'>
+                                <Link className='NavbarMenuLinks' to='/' id='MenuLink'>Home</Link>
                             </li>
-                            <li className={`NavbarMenuLi `}>
-                                <Link className='NavbarMenuLinks' to='/About'>About</Link>
+                            <li className={`NavbarMenuLi `} id='MenuLink'>
+                                <Link className='NavbarMenuLinks' to='/About' id='MenuLink'>About</Link>
                             </li>
-                            <li className={`NavbarMenuLi `}>
-                                <Link className='NavbarMenuLinks' to='/News'>News</Link>
+                            <li className={`NavbarMenuLi `} id='MenuLink'>
+                                <Link className='NavbarMenuLinks' to='/News' id='MenuLink'>News</Link>
                             </li>
-                            <li className={`NavbarMenuLi `}>
-                                <Link className='NavbarMenuLinks' to='/TrendingMarkets'>Trending Markets</Link>
+                            <li className={`NavbarMenuLi `} id='MenuLink'>
+                                <Link className='NavbarMenuLinks' to='/TrendingMarkets' id='MenuLink'>Trending Markets</Link>
                             </li>
-                            <li className={`NavbarMenuLi `}>
-                                <Link className='NavbarMenuLinks' to='/Portfolio'>PortFolio</Link>
+                            <li className={`NavbarMenuLi `} id='MenuLink'>
+                                <Link className='NavbarMenuLinks' to='/Portfolio' id='MenuLink'>PortFolio</Link>
                             </li>
                             {/* <li className={`NavbarMenuLi ${activePill === 'Home' ? 'ActivePill' : ''}`}>
                                  <Link className='NavbarMenuLinks' to='/Market'>Market</Link> 

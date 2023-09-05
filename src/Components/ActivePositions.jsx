@@ -51,7 +51,7 @@ const ActivePositions = () => {
     }
 
     const fetchpriceselected = (Selecteditem) => {
-        const url = `/api/equity/${Selecteditem}`
+        const url = `${process.env.REACT_APP_SERVER_URL}/equity/${Selecteditem}`
         axios.get(url).then((res) => {
             console.log(res)
             setPrice(res.data.priceInfo.lastPrice)

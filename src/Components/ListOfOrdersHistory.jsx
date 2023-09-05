@@ -26,9 +26,9 @@ const ListOfOrdersHistory = (props) => {
 
     const fetchprice = async () => {
         try {
-            const res = await axios.get(`/api/equity/${props.data.Symbol}`);
+            const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}/equity/${props.data.Symbol}`);
             const lastprice = res.data
-            setresponsesymbol(res.data)
+            setresponsesymbol(lastprice)
 
         } catch (err) {
             console.log(err)

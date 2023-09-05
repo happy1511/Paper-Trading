@@ -3,37 +3,22 @@ var express = require('express')
 var app = express()
 var cors = require('cors')
 var port = process.env.PORT || 8000
-const { topgainersandloosers, AllTheIndices, HistoricalData, intraday, endpo, equity, gainers, getEquityHistoricalData, getAllSymbols, marketstatus } = require('./nseapi/allstock')
-var topgainersandlooser = []
+const { mostactive,topgainersandloosers, AllTheIndices, HistoricalData, intraday,news, equity, gainers, getEquityHistoricalData, getAllSymbols, marketstatus } = require('./nseapi/allstock')
+
 app.use(cors())
 
 app.get('/', async (req, res) => {
     res.json(await marketstatus())
 });
 
-app.listen(port, () => {
-    console.log(`server is listening port ${port}`)
-    const topgainesandloose = async () => {
-        const allSymbols = await nseindia.getAllStockSymbols()
-        for (var i = 0; i < allSymbols.length; i++) {
-            var equitydata = await nseindia.getEquityDetails(allSymbols[i]);
-            topgainersandlooser.push(equitydata)
-        }
-        return topgainersandlooser.sort((a, b) => { a.priceInfo.pChange - b.priceInfo.pChange })
-    }
-    topgainesandloose();
-})
 
 app.get('/getAllSymbols', async (req, res) => {
     res.send(await getAllSymbols())
 })
 
-app.get('/ADANIENT', async (req, res) => {
-    res.send(await getEquityHistoricalData())
-})
 
-app.get('/gainers', async (req, res) => {
-    res.send(topgainersandlooser)
+app.get('/gainersandLoosers', async (req, res) => {
+    res.json(await topgainersandloosers())
 })
 
 app.get('/equity/:symbol', async (req, res) => {
@@ -41,7 +26,7 @@ app.get('/equity/:symbol', async (req, res) => {
 })
 
 app.get('/news', async (req, res) => {
-    res.send(await endpo())
+    res.send(await news())
 })
 
 app.get('/intraday/:symbol', async (req, res) => {
@@ -60,12 +45,14 @@ app.get('/historical/:symbol/:start/:end', increaseTimeout, async (req, res) => 
     }))
 })
 
-// app.get('/data',async (req,res)=>{
-//     res.send(await data())
-// })
-
 app.get('/Allindices', async (req, res) => {
     res.json(await AllTheIndices())
 })
 
+app.get('/mostactive/:indexsymbol',async (req,res) => {
+    res.json(await mostactive(req.params.indexsymbol))
+})
 
+app.listen(port, () => {
+    console.log(`server is listening port ${port}`)
+})
