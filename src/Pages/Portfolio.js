@@ -42,8 +42,9 @@ const Portfolio = () => {
           <Header />
           <div className="PortfolioPageInner">
             <div className="PortFolioValueDiv">
+              <h2 className='handleresizemobile'>Paper Trade</h2>
               <div className="PortFolioChooseButtonDiv">
-                <h4>Paper Trade</h4>
+                <h4 className='handleresizelaptop'>Paper Trade</h4>
                 <button className={`PortFolioChooseButton ${!sectionSelection ? 'PortFolioChooseButtonActive' : ''}`} value={0} onClick={() => handleSectionselection(0)}><h3>Positions</h3>Active Trades</button>
                 <button className={`PortFolioChooseButton ${sectionSelection ? 'PortFolioChooseButtonActive' : ''}`} value={1} onClick={() => handleSectionselection(1)}><h3>Performance</h3>Past Trades</button>
               </div>

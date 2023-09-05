@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import '../Css/Login.css'
-import LoginVideo from '../Img_videos/Video.mp4'
+import LoginVideo from './LoginVideo.mp4'
 import Logog from '../Img_videos/Logo-white.png'
 import { auth, db } from '../utilities/Firebase'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";

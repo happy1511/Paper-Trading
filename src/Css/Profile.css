@@ -186,3 +186,16 @@
         display: none !important;
     }
 }
+
+@media screen and (max-width:768px) {
+    .OuterProfileDiv{
+        display: flex;
+        height: 100%;
+    }
+    .ProfileLeftMenu{
+        width: 100%;
+    }
+    .ProfileRightMenu{
+        display: none;
+    }
+}
