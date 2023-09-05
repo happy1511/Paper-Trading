@@ -10,10 +10,11 @@ a {
     font-family: var(--font);
 }
 
-.Page{
+.Page {
     min-height: 100%;
     width: 100%;
 }
+
 .NavbarDiv1 {
     position: fixed;
     z-index: 1111;
@@ -110,7 +111,7 @@ a {
     border-radius: 5px;
 }
 
-.NavbarToggleDiv>button:hover{
+.NavbarToggleDiv>button:hover {
     cursor: pointer;
 }
 
@@ -136,7 +137,7 @@ a {
     border-radius: 50%;
 }
 
-.ProfileDiv>a>svg:hover{
+.ProfileDiv>a>svg:hover {
     background-color: #ffffff3b;
     border-radius: 50%;
 }
@@ -173,19 +174,19 @@ a {
     font-family: var(--font);
 }
 
-.SignInDiv>span>button>a{
+.SignInDiv>span>button>a {
     text-decoration: none;
 }
 
-.Mobile{
+.Mobile {
     display: none;
 }
 
-.MenuShow{
+.MenuShow {
     display: inline-block;
 }
 
-.WhiteBackGround{
+.WhiteBackGround {
     background-color: white;
 }
 
@@ -223,7 +224,8 @@ a {
         background-color: rgba(0, 0, 0, 0.527);
         border-radius: 10px;
     }
-    .NavbarMenuLi:hover>a{
+
+    .NavbarMenuLi:hover>a {
         color: white;
     }
 
@@ -241,7 +243,7 @@ a {
     }
 }
 
-.userAnchorHeader{
+.userAnchorHeader {
     display: flex;
     gap: 10px;
     align-items: center;
@@ -249,18 +251,19 @@ a {
     padding: 0 10px;
 }
 
-.userAnchorHeader:hover{
+.userAnchorHeader>img:hover {
     background-color: #ffffff3b;
     border-radius: 36px;
+    box-shadow: rgba(255, 255, 255, 0.25) 0px 54px 55px, rgba(255, 255, 255, 0.12) 0px -12px 30px, rgba(251, 251, 251, 0.12) 0px 4px 6px, rgba(255, 255, 255, 0.17) 0px 12px 13px, rgba(255, 255, 255, 0.09) 0px -3px 5px;
 }
 
-.ActivePill{
+.ActivePill {
     border-radius: 36px;
     background-color: rgba(255, 255, 255, 0.242);
 }
 
 @media screen and (min-width:1024px) {
-    .NavbarMenuDiv{
+    .NavbarMenuDiv {
         display: flex !important;
     }
 }
