@@ -8,6 +8,7 @@ import MostActiveTrendingPage from '../Components/MostActiveTrendingPage'
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css/core';
 import { useNavigate } from 'react-router-dom'
+import { Puff } from 'react-loader-spinner'
 
 const Trending = () => {
   const [selectedindices, setselectedindices] = useState('nifty 50')
@@ -119,6 +120,7 @@ const Trending = () => {
   }
 
   return (
+    (Allindices.length !==0 && gainers.length !==0 && Loosers.length !==0 && allsym.length !==0 && byValue.length !== 0 && byVolume.length !==0)?
     <>
       <Header />
       <div className="OuterTrendingPage">
@@ -238,7 +240,20 @@ const Trending = () => {
 
       </div >
       <Footer />
-    </>
+    </>: <>
+        <div style={{ display: 'flex', height: '100vh', width: '100vw', alignItems: 'center', justifyContent: 'center' }}>
+          <Puff
+            height="50px"
+            width="50px"
+            radius={1}
+            color="blue"
+            ariaLabel="puff-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+            visible={true}
+          />
+        </div>
+      </>
   )
 }
 
