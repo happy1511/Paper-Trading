@@ -10,7 +10,8 @@
     width: 10px;
   }
   *::-webkit-scrollbar-track {
-    border-radius: 5px;
+    margin-bottom: 10px;
+    border-radius: 10px;
     background-color: black;
   }
   
@@ -23,7 +24,7 @@
   }
   
   *::-webkit-scrollbar-thumb {
-    border-radius: 5px;
+    border-radius: 10px;
     background-color: white;
   }
   

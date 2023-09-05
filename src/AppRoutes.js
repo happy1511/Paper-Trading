@@ -16,7 +16,6 @@ const AppRoutes = () => {
 
     return (
         <Router>
-            <ErrorBoundary>
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/About" element={<About />} />
@@ -33,7 +32,6 @@ const AppRoutes = () => {
                 <Route path='/Profile' element={<Profile />} />
                 <Route path='*' element={<NotFound/>}></Route>
             </Routes>
-            </ErrorBoundary>
         </Router>
     )
 }

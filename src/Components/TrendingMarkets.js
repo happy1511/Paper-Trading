@@ -35,7 +35,7 @@ const TrendingMarkets = () => {
                         </h4>
                     </li>
                     {
-
+                        Gainers.length!==0?
                         (Gainers.slice(0, 10)).map((data) => (
                             <li key={data.symbol}> {/* Added a key prop to the list items */}
                                 <div className="logoS">
@@ -51,7 +51,9 @@ const TrendingMarkets = () => {
                                 </div>
                             </li>
 
-                        ))
+                        )): <> 
+                             <li style={{display:'block'}}><h1 style={{textAlign:'center'}}>No Gainers</h1></li>
+                        </>
                     }
                 </ul>
             </div>
@@ -60,7 +62,7 @@ const TrendingMarkets = () => {
                     <li>
                         <h4>Nifty 50 Losers</h4>
                     </li>
-                    {
+                    {   Loosers.length !== 0?
                        (Loosers.slice(0, 10)).map((data) => (
                         <li key={data.symbol}> {/* Added a key prop to the list items */}
                             <div className="logoS">
@@ -72,11 +74,13 @@ const TrendingMarkets = () => {
                             <div className="PriceS">
                                 <div className="equitychange"> </div>
                                 <div className="CurrentPrice">{data.lastPrice}</div>
-                                <div className="GainPrice">{data.pChange}%</div>
+                                <div className="Looseprice">{data.pChange}%</div>
                             </div>
                         </li>
 
-                    ))
+                    )):<> 
+                    <li style={{display:'block'}}><h1 style={{textAlign:'center'}}>No Loosers</h1></li>
+               </>
                     }
                 </ul>
             </div>

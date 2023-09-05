@@ -18,10 +18,11 @@ const Portfolio = () => {
   const [sectionSelection, setsectionSelection] = useState(0)
 
   const Portfoliovaluefetch = () => {
-    if(auth.currentUser){
-       onValue(ref(db, 'users/' + auth.currentUser.uid + '/portfolio'), (res) => {
-      setPortFolioValue(res.val().availableMoney)
-    }) }
+    if (auth.currentUser) {
+      onValue(ref(db, 'users/' + auth.currentUser.uid + '/portfolio'), (res) => {
+        setPortFolioValue(res.val().availableMoney)
+      })
+    }
     console.log('no')
   }
   useEffect(() => {

@@ -11,6 +11,7 @@ html {
 }
 
 .AllIndicesDiv {
+    z-index: 1;
     display: flex;
     overflow: scroll;
 }
@@ -151,9 +152,10 @@ html {
     height: 50px;
     padding: 10px 10px;
     background-color: black;
-    outline: 1px solid white;
+    border: 1px solid white;
     border-radius: 10px;
     display: flex;
+    position: relative;
 }
 
 .SearchIconTrendingPage>input {
@@ -208,4 +210,55 @@ html {
 
 .splide__list{
     gap: 15px !important;
+}
+
+.focusedborderradius{
+    border-bottom-left-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+}
+
+.hiddenfilterbar{
+    max-height: 70vh;
+    width: 100%;
+    position: absolute;
+    background-color: black;
+    top: 48px;
+    left: -1px;
+    outline: none;
+    border: 1px solid white;
+    border-top: 0px solid black;
+    overflow: scroll;
+    z-index: 2;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    overflow-x: hidden;
+}
+
+.hiddenfilterbar>ul{
+    margin: 0 0;
+    padding: 0 0;
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    list-style: none;
+    overflow: hidden;
+}
+
+.hiddenfilterbar>ul>a{
+    text-decoration: none;
+
+}
+
+.hiddenfilterbar>ul>a>li{
+    box-sizing: border-box;
+    color: white;
+    margin: 0 0;
+    padding: 0 0;
+    width: 100%;
+    padding: 10px 38px;
+    height: fit-content;
+}
+
+.hiddenfilterbar>ul>a>li:hover{
+    background-color: rgba(255, 255, 255, 0.144);
 }

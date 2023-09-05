@@ -19,7 +19,7 @@ const News = () => {
         setDataNews(result.articles)
       }
       catch (error) {
-        console.error(error);
+        console.log(error);
       }
     }
     fetchNews();
@@ -29,11 +29,15 @@ const News = () => {
       <Header />
       <div className='NewsPageOuterDiv'>
         {
-          DataNews.map((data, index) => {
+          DataNews?DataNews.map((data, index) => {
             return (
               <NewsCardNewsPage key={index} data={data}/>
             )
-          })
+          }): <>
+            <div style={{height:'100%',width:'100%',display:'flex',alignItems:'center',color:'white',justifyContent:'center',flexWrap:'wrap'}}>
+              <h1>Something Went wrong</h1>
+            </div>
+          </>
         }
       </div>
       <Footer />

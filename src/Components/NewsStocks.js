@@ -50,7 +50,7 @@ const NewsStocks = () => {
     // const g = (JSON.parse(result)).data.main.stream
     return (
         <>
-            {
+            {newsData?
                 newsData.map((v, index) => {
                     const handle = v
                     return (
@@ -69,7 +69,15 @@ const NewsStocks = () => {
                             </a>
                         </> : ""
                     )
-                })
+                }):
+                <>
+                    <div style={{height:'100%',width:'100%',color:'white',display:'flex',alignItems:'center',justifyContent:'center',flexWrap:'wrap'}}>
+                        <h1>Something Went Wrong.
+                            <br/>
+                            No News For Displaying.
+                        </h1>
+                    </div>
+                </>
             }
         </>
     )
