@@ -198,6 +198,11 @@
     .ProfileRightMenu{
         display: none;
     }
+    .ProfilePictureMenuRight{
+        padding: 20px 20px;
+        height: fit-content;
+    }
+
 }
 
 .mobilesee{
@@ -220,3 +225,5 @@
     align-items: center;
     justify-content: center;
 }
+
+
