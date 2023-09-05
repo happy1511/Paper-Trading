@@ -21,7 +21,7 @@ const Profile = () => {
     const [SettigMenu, setSettingMenu] = useState(false)
     const [ProfilePhotoUrl, setProfilePhotoUrl] = useState(auth.currentUser?.photoURL)
     const [close, setclose] = useState('visible')
-    const [mobilesee,setmobilesee] = useState(false)
+    const [mobilesee, setmobilesee] = useState(false)
     const handleChangePictureEvent = (e) => {
         updateProfile(auth.currentUser, {
             photoURL: e.target.src
@@ -31,7 +31,7 @@ const Profile = () => {
     }
 
     const handleRightMenu = (e) => {
-        if (window.innerWidth < 768){
+        if (window.innerWidth < 768) {
             setmobilesee(true)
         }
         console.log(mobilesee)
@@ -91,71 +91,75 @@ const Profile = () => {
     }
 
     return (
-        
-            auth.currentUser ? <>
-                <Header />
-                <div className="ProfileDivPage" >
 
-                    <div className="OuterProfileDiv">
-                        <div className="ProfileLeftMenu"  style={mobilesee?{display:'none !important'}:{display:'flex !important'}}>
-                            <div className="ProfilePhotoProfilePage">
-                                <img src={ProfilePhotoUrl} alt="" />
-                            </div>
+        auth.currentUser ? <>
+            <Header />
+            <div className="ProfileDivPage" >
 
-                            <div className="ProfileDetailProfilePage">
-                                <p className='ProfileDetailProfilePageP'><pre>hello!   <u style={{ color: "white" }}>{auth.currentUser.displayName}</u></pre></p>
-                            </div>
-                            <button className='ChangeProfilePictureButton' onClick={() => { handleRightMenu(1) }}>
-                                Change Profile Picture
-                            </button>
-                            <button className='ChangeProfilePictureButton' onClick={() => { handleRightMenu(2) }}>
-                                Show History
-                            </button>
-                            <button className='ChangeProfilePictureButton' onClick={() => { handleRightMenu(3) }}>
-                                Settings
-                            </button>
-                            <button className='ChangeProfilePictureButton' onClick={handleLogout}>
-                                Logout
-                            </button>
-
+                <div className="OuterProfileDiv">
+                    <div className={`ProfileLeftMenu ${mobilesee ? 'mobilesee' : ''}`}>
+                        <div className="ProfilePhotoProfilePage">
+                            <img src={ProfilePhotoUrl} alt="" />
                         </div>
-                        <div className="ProfileRightMenu">
-                            {
-                                PictureMenu ? <>
-                                    <p> <button style={mobilesee?{display:'iniline'}:{display:'none'}}>back</button>Select Profile Picture</p>
-                                    <div className="ProfilePictureMenuRight">
-                                        <div onClick={handleChangePictureEvent}>
-                                            <img src={p1} alt="" />
-                                        </div>
-                                        <div onClick={handleChangePictureEvent}>
-                                            <img src={p2} alt="" />
-                                        </div>
-                                        <div onClick={handleChangePictureEvent}>
-                                            <img src={p3} alt="" />
-                                        </div>
-                                        <div onClick={handleChangePictureEvent}>
-                                            <img src={p4} alt="" />
-                                        </div>
-                                        <div onClick={handleChangePictureEvent}>
-                                            <img src={p5} alt="" />
-                                        </div>
-                                        <div onClick={handleChangePictureEvent}>
-                                            <img src={p6} alt="" />
-                                        </div>
-                                        <div onClick={handleChangePictureEvent}>
-                                            <img src={p7} alt="" />
-                                        </div>
-                                        <div onClick={handleChangePictureEvent}>
-                                            <img src={p8} alt="" />
-                                        </div>
+
+                        <div className="ProfileDetailProfilePage">
+                            <p className='ProfileDetailProfilePageP'><pre>hello!   <u style={{ color: "white" }}>{auth.currentUser.displayName}</u></pre></p>
+                        </div>
+                        <button className='ChangeProfilePictureButton' onClick={() => { handleRightMenu(1) }}>
+                            Change Profile Picture
+                        </button>
+                        <button className='ChangeProfilePictureButton' onClick={() => { handleRightMenu(2) }}>
+                            Show History
+                        </button>
+                        <button className='ChangeProfilePictureButton' onClick={() => { handleRightMenu(3) }}>
+                            Settings
+                        </button>
+                        <button className='ChangeProfilePictureButton' onClick={handleLogout}>
+                            Logout
+                        </button>
+
+                    </div>
+                    <div className={`ProfileRightMenu ${mobilesee ? 'profilesee' : ''}`}>
+                        {
+                            PictureMenu ? <>
+                                <p> <button style={mobilesee ? { display: 'inline' } : { display: 'none' }} className='buttonproileback' onClick={() => setmobilesee(false)}>
+                                    <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14.9991 19L9.83911 14C9.56672 13.7429 9.34974 13.433 9.20142 13.0891C9.0531 12.7452 8.97656 12.3745 8.97656 12C8.97656 11.6255 9.0531 11.2548 9.20142 10.9109C9.34974 10.567 9.56672 10.2571 9.83911 10L14.9991 5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                                </button>Select Profile Picture</p>
+                                <div className="ProfilePictureMenuRight">
+                                    <div onClick={handleChangePictureEvent}>
+                                        <img src={p1} alt="" />
                                     </div>
-                                </> : ""
-                            }
-                            {
-                                HistoryMenu ? <>
-                                    <p><button style={mobilesee?{display:'iniline'}:{display:'none'}}>back</button>List of Previous Orders</p>
-                                    <div className="HistoryMenuRight">
-                                        {/* <ListOfOrdersHistory />
+                                    <div onClick={handleChangePictureEvent}>
+                                        <img src={p2} alt="" />
+                                    </div>
+                                    <div onClick={handleChangePictureEvent}>
+                                        <img src={p3} alt="" />
+                                    </div>
+                                    <div onClick={handleChangePictureEvent}>
+                                        <img src={p4} alt="" />
+                                    </div>
+                                    <div onClick={handleChangePictureEvent}>
+                                        <img src={p5} alt="" />
+                                    </div>
+                                    <div onClick={handleChangePictureEvent}>
+                                        <img src={p6} alt="" />
+                                    </div>
+                                    <div onClick={handleChangePictureEvent}>
+                                        <img src={p7} alt="" />
+                                    </div>
+                                    <div onClick={handleChangePictureEvent}>
+                                        <img src={p8} alt="" />
+                                    </div>
+                                </div>
+                            </> : ""
+                        }
+                        {
+                            HistoryMenu ? <>
+                                <p><button style={mobilesee ? { display: 'inline' } : { display: 'none' }} className='buttonproileback' onClick={() => setmobilesee(false)}>
+                                    <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14.9991 19L9.83911 14C9.56672 13.7429 9.34974 13.433 9.20142 13.0891C9.0531 12.7452 8.97656 12.3745 8.97656 12C8.97656 11.6255 9.0531 11.2548 9.20142 10.9109C9.34974 10.567 9.56672 10.2571 9.83911 10L14.9991 5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                                </button>List of Previous Orders</p>
+                                <div className="HistoryMenuRight">
+                                    {/* <ListOfOrdersHistory />
                                     <ListOfOrdersHistory/>
                                     <ListOfOrdersHistory />
                                     <ListOfOrdersHistory/>
@@ -165,29 +169,31 @@ const Profile = () => {
                                     <ListOfOrdersHistory/>
                                     <ListOfOrdersHistory />
                                     <ListOfOrdersHistory/> */}
-                                    </div>
-                                </> : ""
-                            }
-                            {
-                                SettigMenu ? <>
-                                    <p><button style={mobilesee?{display:'iniline'}:{display:'none'}}>back</button>Settings</p>
-                                    <div className="settingsDiv">
-                                        <div className="SettingsCard">
-                                            <h3>Reset Your Account Data</h3>
-                                            <button onClick={handleclick}>Reset</button>
-                                            <div className="alert" style={{ display: close }}>
-                                                Account Successfully Resetted.
-                                                <button onClick={handleclose}>&times;</button>
-                                            </div>
+                                </div>
+                            </> : ""
+                        }
+                        {
+                            SettigMenu ? <>
+                                <p><button style={mobilesee ? { display: 'inline' } : { display: 'none' }} className='buttonproileback' onClick={() => setmobilesee(false)}>
+                                    <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M14.9991 19L9.83911 14C9.56672 13.7429 9.34974 13.433 9.20142 13.0891C9.0531 12.7452 8.97656 12.3745 8.97656 12C8.97656 11.6255 9.0531 11.2548 9.20142 10.9109C9.34974 10.567 9.56672 10.2571 9.83911 10L14.9991 5" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                                </button>Settings</p>
+                                <div className="settingsDiv">
+                                    <div className="SettingsCard">
+                                        <h3>Reset Your Account Data</h3>
+                                        <button onClick={handleclick}>Reset</button>
+                                        <div className="alert" style={{ display: close }}>
+                                            Account Successfully Resetted.
+                                            <button onClick={handleclose}>&times;</button>
                                         </div>
                                     </div>
-                                </> : ""
-                            }
-                        </div>
+                                </div>
+                            </> : ""
+                        }
                     </div>
                 </div>
-            </> : <Login/>
-        
+            </div>
+        </> : <Login />
+
     )
 }
 

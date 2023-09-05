@@ -199,3 +199,24 @@
         display: none;
     }
 }
+
+.mobilesee{
+    display: none;
+}
+
+.profilesee{
+    display: block;
+}
+
+.buttonproileback{
+    background-color: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
+}
+
+.ProfileRightMenu>p{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

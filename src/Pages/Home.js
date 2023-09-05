@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../Css/Home.css'
 import Investing_has from './Investing_has.png'
 import Nave_been from './Never_Been.png'
@@ -17,14 +17,40 @@ import axios from 'axios'
 
 
 const Home = () => {
+  const [inputvalue,setinputalue] = useState('')
+  const [allsy,setallsy] = useState([])
+  const [filtered,setfiltered] = useState([])
+  const [focus,setfocus] = useState(false)
   useEffect(() => {
-    const getalls = async()=>{
+    const getalls = async () => {
       await axios.get(process.env.REACT_APP_SERVER_URL + '/getAllSymbols').then((res) => {
         localStorage.setItem('AllSymbols', res.data);
       }).catch((Err) => { console.log(Err) })
     }
     getalls();
-  },[])
+    setallsy(localStorage.getItem('AllSymbols').split(','))
+  }, [])
+
+  const handleinput = (e) => {
+    setinputalue(e.target.value)
+    setfocus(true)
+    window.addEventListener('click',handleclick)
+    if(inputvalue !== ''){
+      setfiltered(allsy.filter(option => option.toLowerCase().includes(e.target.value.toLowerCase())))
+    }
+    else{
+      setfiltered([])
+    }
+  }
+
+  const handleclick = (e) => {
+    if (e.srcElement.id !== "searchitem") {
+      setfiltered([])
+      setfocus(false)
+      window.removeEventListener('click', handleclick)
+      setinputalue('')
+    }
+  }
   return (
     <>
       {/* <Router> */}
@@ -44,7 +70,7 @@ const Home = () => {
             <p>On LearnToTrade Learn <br />How To Invest</p>
           </div>
           <div className="inputform">
-            <button>
+            <button className={`buttoninputhome ${focus?'focusing':''}`}>
               <span>
                 <svg width="30px" height="100%" viewBox="0 -0.5 25 25" fill="none"
                   xmlns="http://www.w3.org/2000/svg">
@@ -55,7 +81,16 @@ const Home = () => {
                     strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </span>
-              <input type="text" placeholder="Enter Markets here" />
+              <input type="text"  id='searchitem' value={inputvalue} placeholder="Enter Markets here" onChange={handleinput} onFocus={()=>{setfocus(true)}}/>
+              <div className='absolutefilter' style={focus?{display:'block'}:{display:'none'}}>
+                <ul>
+                    {
+                      filtered.map((data) => {
+                        return <a href={`/Chart/${data}`}><li id='searchitem' >{data}</li></a>
+                      })
+                    }
+                </ul>
+              </div>
             </button>
           </div>
         </div>
@@ -90,7 +125,7 @@ const Home = () => {
         <div className="TrendingOuter">
           <TrendingMarkets />
         </div>
-      </div> 
+      </div>
       <Footer />
 
       {/* </Router> */}

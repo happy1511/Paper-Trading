@@ -123,3 +123,54 @@ font-family: 'Ubuntu', sans-serif; */
     
     }
 }
+
+.buttoninputhome{
+    position: relative;
+}
+
+.absolutefilter{
+    position: absolute;
+    height: fit-content;
+    max-height: 100px;
+    width: 100%;
+    background-color: white;
+    border-bottom-left-radius:20px ;
+    border-bottom-right-radius:20px ;
+    top: 50px;
+}
+
+.absolutefilter>ul{
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+    margin: 0 0;
+    padding: 0 0;
+    list-style: none;
+}
+
+.absolutefilter>ul::-webkit-scrollbar{
+    display: none;
+}
+
+.absolutefilter>ul>a{
+    text-decoration: none;
+}
+
+.absolutefilter>ul>a>li:hover{
+    background-color: rgba(0, 0, 0, 0.163);
+}
+
+.absolutefilter>ul>a>li{
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    width: 100%;
+    padding: 5px 35px;
+    color: black;
+    font-weight: 500;
+    text-align: start;
+}
+
+.focusing{
+    border-radius: 10px !important;
+    border-bottom-left-radius: 0px !important;
+    border-bottom-right-radius: 0px !important;
+}
