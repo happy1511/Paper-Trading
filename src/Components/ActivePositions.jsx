@@ -146,7 +146,7 @@ const ActivePositions = () => {
         e.preventDefault();
         setSymbolInput(e.target.value)
         filterinput();
-        if(!e.target.value){
+        if (!e.target.value) {
             setPrice(0)
         }
     }
@@ -157,10 +157,10 @@ const ActivePositions = () => {
     const updatePositionPL = () => {
         if (Orders) {
             var totalPL = 0
-            console.log('total',totalPL)
+            console.log('total', totalPL)
             Object.keys(Orders).map((res) => {
                 const orderd = Orders[res]
-                console.log('hh',orderd.ProfitLose,'type:',orderd.ordertype)
+                console.log('hh', orderd.ProfitLose, 'type:', orderd.ordertype)
                 if (orderd.openOrClose === "open") {
                     totalPL = totalPL + orderd.ProfitLose
                 }
@@ -168,7 +168,7 @@ const ActivePositions = () => {
 
             const updateobj2 = {}
             updateobj2['users/' + auth.currentUser.uid + '/portfolio/positionsPL'] = Number((totalPL).toFixed(2))
-            update(ref(db),updateobj2).catch(err=>{})
+            update(ref(db), updateobj2).catch(err => { })
         }
     }
     useEffect(() => {
@@ -192,7 +192,6 @@ const ActivePositions = () => {
                         <div className="AddStockBody">
                             <div className="SearchAddstock">
                                 <input type="text" value={SymbolInput} onFocus={() => setDisabled(true)} onChange={handleSymolInput} onBlur={handleBlur} placeholder='Search & Select Stock By StockSymbol' />
-                                <div className="SearchButton">Search</div>
                                 <div className="SearchedFilter">
                                     {
                                         founded.length > 2 ? founded.map((data, index) => {
@@ -208,21 +207,26 @@ const ActivePositions = () => {
 
                             <form action="">
                                 <div className="BuySellButtonDiv">
-                                    <button className={`BuyButton ${ordertype === 'buy' ? 'activeordertype' : ''}`} value={'buy'} onClick={handleordertype}>Buy</button>
-                                    <button className={`SellButton  ${ordertype === 'sell' ? 'activeordertype' : ''}`} value={'sell'} onClick={handleordertype}>Sell</button>
-                                    <div className="PositionsInvested1">
-                                        <h3 className='PositionsPLH3'>₹{MoneyObj.availableMoney}</h3>
-                                        <p className='PositionsPLHP'>Available Cash</p>
-                                    </div>
+                                    <div className="one">
+                                        <button className={`BuyButton ${ordertype === 'buy' ? 'activeordertype' : ''}`} value={'buy'} onClick={handleordertype}>Buy</button>
+                                        <button className={`SellButton  ${ordertype === 'sell' ? 'activeordertype' : ''}`} value={'sell'} onClick={handleordertype}>Sell</button>
 
-                                    <div style={{ marginLeft: '20px' }} className="PositionsInvested1">
-                                        <h3 className='PositionsPLH3'>₹{Price}</h3>
-                                        <p className='PositionsPLHP'>Stock Price</p>
                                     </div>
+                                    <div className="two">
+                                        <div className="PositionsInvested1">
+                                            <h3 className='PositionsPLH3'>₹{MoneyObj.availableMoney}</h3>
+                                            <p className='PositionsPLHP'>Available Cash</p>
+                                        </div>
 
-                                    <div style={{ marginLeft: '20px' }} className="PositionsInvested1">
-                                        <h3 className='PositionsPLH3'>₹{TotalBill}</h3>
-                                        <p className='PositionsPLHP'>Total Bill</p>
+                                        <div style={{ marginLeft: '20px' }} className="PositionsInvested1">
+                                            <h3 className='PositionsPLH3'>₹{Price}</h3>
+                                            <p className='PositionsPLHP'>Stock Price</p>
+                                        </div>
+
+                                        <div style={{ marginLeft: '20px' }} className="PositionsInvested1">
+                                            <h3 className='PositionsPLH3'>₹{TotalBill}</h3>
+                                            <p className='PositionsPLHP'>Total Bill</p>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="InputQuantity">

@@ -194,3 +194,34 @@
     background-color: white;
     color: black;
 }
+
+.one{
+    display: flex;
+}
+
+.two{
+    display: flex;
+}
+
+@media screen and (max-width:584px) {
+    .BuySellButtonDiv{
+        flex-wrap: wrap;
+        gap: 30px;
+        align-items: center;
+        justify-content: space-around;
+    }
+    .SellButton{
+        padding: 10px 20px;
+    }
+    .BuyButton{
+        padding: 10px 20px;
+    }
+    .SubmitButtonAddStock{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin: 0 0;
+        padding: 20px 0;
+    }
+}
