@@ -8,7 +8,7 @@ const TrendingMarkets = () => {
     // const [allSymbols, setallsymbols] = useState([])
     const TrendingM = async () => {
         try {
-            const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/gainersandLoosers`)
+            const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/gainersandLoosers/Nifty 50`)
             setGainers(response.data.gainers)
             setLoosers(response.data.losers)
         } catch (error) { console.log(error) }
