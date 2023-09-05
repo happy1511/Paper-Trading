@@ -17,8 +17,8 @@ app.get('/getAllSymbols', async (req, res) => {
 })
 
 
-app.get('/gainersandLoosers', async (req, res) => {
-    res.json(await topgainersandloosers())
+app.get('/gainersandLoosers/:symbol', async (req, res) => {
+    res.json(await topgainersandloosers(req.params.symbol))
 })
 
 app.get('/equity/:symbol', async (req, res) => {

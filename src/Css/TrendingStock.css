@@ -12,6 +12,7 @@
 }
 
 .Gul{
+    box-sizing: border-box;
     margin: 0 0;
     padding: 10px 10px;
     width: calc(100% - 2px);

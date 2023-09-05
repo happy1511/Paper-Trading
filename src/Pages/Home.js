@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import '../Css/Home.css'
 import Investing_has from './Investing_has.png'
 import Nave_been from './Never_Been.png'

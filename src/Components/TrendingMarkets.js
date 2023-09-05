@@ -72,7 +72,7 @@ const TrendingMarkets = () => {
                             <div className="PriceS">
                                 <div className="equitychange"> </div>
                                 <div className="CurrentPrice">{data.lastPrice}</div>
-                                <div className="GainPrice">+{data.pChange}%</div>
+                                <div className="GainPrice">{data.pChange}%</div>
                             </div>
                         </li>
 

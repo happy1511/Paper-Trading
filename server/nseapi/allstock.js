@@ -49,8 +49,8 @@ exports.AllTheIndices = () => {
     return nseindia.getDataByEndpoint('/api/allIndices')
 }
 
-exports.topgainersandloosers =async () => {
-    const indexData = await nseindia.getEquityStockIndices('nifty 50');
+exports.topgainersandloosers =async (indexSymbol) => {
+    const indexData = await nseindia.getEquityStockIndices(indexSymbol);
     const gainers = [];
     const losers = [];
     indexData.data.forEach((equityInfo) => {
