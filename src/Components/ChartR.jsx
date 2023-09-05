@@ -2,6 +2,7 @@ import React, { createRef, useEffect, useState } from 'react';
 import { Chart } from 'chart.js';
 import 'chart.js/auto';
 import axios from 'axios';
+import { Await } from 'react-router-dom';
 
 const ChartR = (props) => {
     const chartRef = createRef();
@@ -12,7 +13,7 @@ const ChartR = (props) => {
     //     console.log('changed')
     //     FetchDate()
     // },[selectedchart])
-    const createGradient= (startColor, endColor , ctx) => {
+    const createGradient = (startColor, endColor, ctx) => {
         var gradient = ctx.createLinearGradient(0, 0, 0, 400); // Adjust gradient dimensions
         gradient.addColorStop(0, startColor);
         gradient.addColorStop(1, endColor);
@@ -23,6 +24,16 @@ const ChartR = (props) => {
         var month = (date.getMonth() + 1).toString().padStart(2, '0');
         var day = date.getDate().toString().padStart(2, '0');
         return `${year}-${month}-${day}`;
+    }
+    const setcolorfunc = () => {
+        if (props.historical === 0) {
+            return stockprice[0]?((stockprice[0])[1] > (stockprice[stockprice.length - 1])[1] ? 'red' : 'green'): 'blue'
+            // return (stockprice[0])[1]> (stockprice[stockprice.length - 1])[1] ? 'red' : 'green'
+            
+        }
+        else {
+            return stockprice[0].CH_CLOSING_PRICE > stockprice[stockprice.length - 1].CH_CLOSING_PRICE ? 'red' : 'green'
+        }
     }
     const buildChart = () => {
         const myChartRef = chartRef.current.getContext('2d');
@@ -41,25 +52,25 @@ const ChartR = (props) => {
                     {
 
                         data: props.historical === 0 ? stockprice.map((res) => res[1]) : stockprice.map((res) => res.CH_CLOSING_PRICE),
-                        backgroundColor: createGradient(Color, 'transparent',myChartRef),
-                        borderColor: Color,
+                        backgroundColor: createGradient(setcolorfunc(), 'transparent', myChartRef),
+                        borderColor: setcolorfunc(),
                         borderWidth: 1,
                         pointRadius: 0,
                     },
                 ],
             },
             options: {
-                animation:false,
+                animation: false,
                 responsive: true,
                 maintainAspectRatio: false,
                 elements: {
                     line: {
-                        fill:true,
+                        fill: true,
                     }
                 },
                 plugins: {
                     annotation: {
-                        enabled: false ,
+                        enabled: false,
                     },
                     legend: {
                         display: false,
@@ -85,7 +96,7 @@ const ChartR = (props) => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/intraday/${props.data}`);
-                setstockprice(response.data.grapthData);  
+                setstockprice(response.data.grapthData);
                 // (stockprice[0][1] > stockprice[stockprice.length-1][1])?setColor('red'):setColor('green')
                 // Build the chart using the updated stockprice
             } catch (error) {
@@ -102,7 +113,8 @@ const ChartR = (props) => {
 
                 // Calculate the date 5 days ago
                 var fiveDaysAgo = new Date();
-                fiveDaysAgo.setDate(currentDate.getDate() - 5);
+                fiveDaysAgo.setDate(currentDate.getDate() - 6);
+
 
                 // Format the dates in yyyy-mm-dd format
                 var formattedCurrentDate = formatDateToYYYYMMDD(currentDate);
@@ -110,6 +122,7 @@ const ChartR = (props) => {
                 try {
                     const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/historical/${props.data}/${formattedFiveDaysAgo}/${formattedCurrentDate}`);
                     setstockprice(response.data[0].data);
+                    console.log(response)
                 } catch (error) {
                     console.log(error);
                 }
@@ -119,7 +132,7 @@ const ChartR = (props) => {
 
                 // Calculate the date 5 days ago
                 var fiveDaysAgo = new Date();
-                fiveDaysAgo.setDate(currentDate.getMonth() - 1);
+                fiveDaysAgo.setMonth(currentDate.getMonth() - 1);
 
                 // Format the dates in yyyy-mm-dd format
                 var formattedCurrentDate = formatDateToYYYYMMDD(currentDate);
@@ -127,8 +140,6 @@ const ChartR = (props) => {
                 try {
                     const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/historical/${props.data}/${formattedFiveDaysAgo}/${formattedCurrentDate}`);
                     setstockprice(response.data[0].data);
-                    console.log(response)
-                    console.log(stockprice)
                 } catch (error) {
                     console.log(error);
                 }
@@ -138,25 +149,23 @@ const ChartR = (props) => {
 
                 // Calculate the date 5 days ago
                 var fiveDaysAgo = new Date();
-                fiveDaysAgo.setDate(currentDate.getMonth() - 6);
-
+                fiveDaysAgo.setMonth(currentDate.getMonth() - 6);
                 // Format the dates in yyyy-mm-dd format
                 var formattedCurrentDate = formatDateToYYYYMMDD(currentDate);
                 var formattedFiveDaysAgo = formatDateToYYYYMMDD(fiveDaysAgo);
+
                 try {
                     const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/historical/${props.data}/${formattedFiveDaysAgo}/${formattedCurrentDate}`);
                     setstockprice(response.data[0].data);
-                    console.log(response)
-                    console.log(stockprice)
-                    // console.log(stockprice[0].CH_CLOSING_PRICE > stockprice[stockprice.length - 1].CH_CLOSING_PRICE)
-                     
+
                 } catch (error) {
                     console.log(error);
                 }
             }
         }
         FetchDate()
-           
+        props.historical === 0 ? setColor('blue') : (stockprice[0].CH_CLOSING_PRICE > stockprice[stockprice.length - 1].CH_CLOSING_PRICE) ? setColor('red') : setColor('green')
+
         // Clean up function to destroy the chart instance when the component unmounts
 
     }, [props.historical]);
@@ -175,15 +184,14 @@ const ChartR = (props) => {
         }; // This should show the updated value
 
     }, [stockprice]);
-    useEffect(()=>{
-        if (props.historical !== 0){
+    useEffect(() => {
+        if (props.historical !== 0) {
             // (stockprice[0].CH_CLOSING_PRICE > stockprice[stockprice.length - 1].CH_CLOSING_PRICE) ? setColor('red') : setColor('green')
         }
-        else{
-            
-        }
-    },[stockprice])
+        else {
 
+        }
+    }, [stockprice])
     return (
 
         <canvas ref={chartRef} style={{ height: '100% !important', width: '100% !important' }} />

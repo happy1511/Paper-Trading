@@ -16,7 +16,6 @@ const Trending = () => {
   const [byValue, setbyValue] = useState([])
   const [gainers, setgainers] = useState([])
   const [Loosers, setLoosers] = useState([])
-  const h = window.innerWidth - 60
   const splideOptions = {
     // Or 'loop' depending on your use case
     arrows: false,
@@ -42,49 +41,49 @@ const Trending = () => {
       console.error(err)
     })
   }
-  // const fetchselected = () => {
-  //   const url = '/api/mostActive/' + selectedindices.toLowerCase()
-  //   axios.get(url).then((res) => {
-  //     setbyVolume(res.data.byVolume)
-  //     setbyValue(res.data.byValue)
-  //   }).catch((err) => {
-  //     console.error(err)
-  //   })
-  // }
+  const fetchselected = () => {
+    const url = ` ${process.env.REACT_APP_SERVER_URL}/mostactive/${selectedindices.toLowerCase()}`
+    axios.get(url).then((res) => {
+      setbyVolume(res.data.byVolume)
+      setbyValue(res.data.byValue)
+    }).catch((err) => {
+      console.error(err)
+    })
+  }
 
-  // const fetchGL = () => {
-  //   const surl = '/api/gainersAndLosers/' + selectedIndicesTopGL.toLowerCase()
-  //   axios.get(surl).then((res) => {
-  //     setgainers(res.data.gainers)
-  //     setLoosers(res.data.losers)
-  //   }).catch((err) => {
-  //     console.error(err)
-  //   })
-  // }
-  // const handleindiceschange = (e) => {
-  //   setselectedindices(e.target.value)
-  // }
-  // const handleindiceschangeTopGL = (e) => {
-  //   setselectedIndicesTopGL(e.target.value)
-  // }
-  // useEffect(() => {
-  //   fetchindices();
-  //   fetchselected();
-  //   fetchGL();
+  const fetchGL = () => {
+    const surl = `${process.env.REACT_APP_SERVER_URL}/gainersandLoosers/${selectedIndicesTopGL.toLowerCase()}`
+    axios.get(surl).then((res) => {
+      setgainers(res.data.gainers)
+      setLoosers(res.data.losers)
+    }).catch((err) => {
+      console.error(err)
+    })
+  }
+  const handleindiceschange = (e) => {
+    setselectedindices(e.target.value)
+  }
+  const handleindiceschangeTopGL = (e) => {
+    setselectedIndicesTopGL(e.target.value)
+  }
+  useEffect(() => {
+    fetchindices();
+    fetchselected();
+    fetchGL();
 
-  //   setInterval ( () => {
-  //     fetchselected();
-  //     fetchGL();
-  //   },1000)
-  // }, [])
+    setInterval ( () => {
+      fetchselected();
+      fetchGL();
+    },5000)
+  }, [])
 
-  // useEffect(() => {
-  //   fetchselected();
-  // }, [selectedindices])
+  useEffect(() => {
+    fetchselected();
+  }, [selectedindices])
 
-  // useEffect(() => {
-  //   fetchGL();
-  // }, [selectedIndicesTopGL])
+  useEffect(() => {
+    fetchGL();
+  }, [selectedIndicesTopGL])
   useEffect(()=>{
     fetchindices();
   })
@@ -110,7 +109,7 @@ const Trending = () => {
 
           </Splide>
         </div>
-        {/* <h2 className='TrendingPageHeaders'>Most Active Stocks</h2>
+         <h2 className='TrendingPageHeaders'>Most Active Stocks</h2>
         <select name="" id="" className='optionIndices' onChange={handleindiceschange}>
           {Allindices.map((data) => {
             return (
@@ -196,7 +195,7 @@ const Trending = () => {
               })
             }
           </Splide>
-        </div> */}
+        </div> 
 
       </div >
       <Footer />

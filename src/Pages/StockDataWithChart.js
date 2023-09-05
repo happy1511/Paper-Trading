@@ -26,7 +26,7 @@ const StockDataWithChart = () => {
     },[Symboldata])
      const FetchMarketStatus = async () => {
          try {
-             const response = await axios.get('http://localhost:8000/');
+             const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}`);
              console.log(response)
              response.data.marketState[0].marketStatus === 'Closed' ? setMarketStatus(0) : setMarketStatus(1)
              console.log(MarketStatus)
