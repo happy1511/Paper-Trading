@@ -122,7 +122,7 @@ const Header = () => {
                                         console.log(auth.currentUser.photoURL)
                                     }}
                                     <img src={auth.currentUser.photoURL} alt="" srcSet="" height="30px" />
-                                    <p className='usernameHeader'>{auth.currentUser.displayName}</p>
+                                    {/* <p className='usernameHeader'>{auth.currentUser.displayName}</p> */}
                                 </Link>
                             </> : <>
                                 <Link to='/Login'>
