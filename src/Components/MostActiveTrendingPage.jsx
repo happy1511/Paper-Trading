@@ -16,7 +16,7 @@ const MostActiveTrendingPage = (props) => {
                 }} className='MostActiveTrendingPageimg' />
             </div>
             <h3 className='MostActiveTrendingPageHeaders'>{props.data.symbol} ({props.data.pChange}%)</h3>
-            <h4 className='MostActiveTrendingPageHeaders MostActivePrice'><span>{props.data.lastPrice}</span><span>{props.data.change}</span></h4>
+            <h4 className='MostActiveTrendingPageHeaders MostActivePrice'><span>{props.data.lastPrice}</span><span>{Number(props.data.change).toFixed(2)}</span></h4>
             <h6 className='MostActiveTrendingPageHeaders MostActiveTrendingPageHeadersIndustry'>{props.data.meta?.industry}</h6>
         </div>
     )
