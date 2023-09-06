@@ -24,7 +24,7 @@ const Footer = () => {
                                 <h3 className='LinksH4'>Relates Links</h3>
                                 <p><a href="/TrendingMarkets">Trending Markets</a></p>
                                 <p><a href="/Portfolio">Portfolio</a></p>
-                                <p><a href="/Aout">About Us</a></p>
+                                <p><a href="/About">About Us</a></p>
                             </div>
                             <div className='FooterUl'>
                                 <h3 className='LinksH4'>Quick Links</h3>
