@@ -22,16 +22,14 @@ const Footer = () => {
                         <div>
                             <div className='FooterUl'>
                                 <h3 className='LinksH4'>Relates Links</h3>
-                                <p><a href="">Explore Market</a></p>
-                                <p><a href="">Trending Markets</a></p>
-                                <p><a href="">Portfolio</a></p>
-                                <p><a href="">About Us</a></p>
-                                <p><a href="">Site Map</a></p>
+                                <p><a href="/TrendingMarkets">Trending Markets</a></p>
+                                <p><a href="/Portfolio">Portfolio</a></p>
+                                <p><a href="/Aout">About Us</a></p>
                             </div>
                             <div className='FooterUl'>
                                 <h3 className='LinksH4'>Quick Links</h3>
-                                <p><a href="">NSe India</a></p>
-                                <p><a href="">BSE India</a></p>
+                                <p><a href="https://www.nseindia.com/">NSe India</a></p>
+                                <p><a href="https://www.bseindia.com/">BSE India</a></p>
                             </div>
                         </div>
                         <div className="ContactFormDiv">

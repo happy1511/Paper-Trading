@@ -2,7 +2,6 @@ import React, { createRef, useEffect, useState } from 'react';
 import { Chart } from 'chart.js';
 import 'chart.js/auto';
 import axios from 'axios';
-import { Await } from 'react-router-dom';
 
 const ChartR = (props) => {
     const chartRef = createRef();
@@ -27,9 +26,9 @@ const ChartR = (props) => {
     }
     const setcolorfunc = () => {
         if (props.historical === 0) {
-            return stockprice[0]?((stockprice[0])[1] > (stockprice[stockprice.length - 1])[1] ? 'red' : 'green'): 'blue'
+            return stockprice[0] ? ((stockprice[0])[1] > (stockprice[stockprice.length - 1])[1] ? 'red' : 'green') : 'blue'
             // return (stockprice[0])[1]> (stockprice[stockprice.length - 1])[1] ? 'red' : 'green'
-            
+
         }
         else {
             return stockprice[0].CH_CLOSING_PRICE > stockprice[stockprice.length - 1].CH_CLOSING_PRICE ? 'red' : 'green'
@@ -193,9 +192,8 @@ const ChartR = (props) => {
         }
     }, [stockprice])
     return (
-
-        <canvas ref={chartRef} style={{ height: '100% !important', width: '100% !important' }} />
-
+            <canvas ref={chartRef} style={{ height: '100% !important', width: '100% !important' }} />
+           
     );
 };
 

@@ -16,7 +16,7 @@ const ListOfOrdersHistory = (props) => {
 
         const updateObject = {};
         updateObject['users/' + auth.currentUser.uid + '/Orders/' + props.orderkey + '/EndingPrice'] = Number(lprice);
-        updateObject['users/' + auth.currentUser.uid + '/portfolio/profitorlose'] = Number(profitorlose.profitorlose?profitorlose.profitorlose:0) + Number(diff);
+        updateObject['users/' + auth.currentUser.uid + '/portfolio/profitorlose'] = Number(profitorlose.profitorlose ? profitorlose.profitorlose : 0) + Number(diff);
         updateObject['users/' + auth.currentUser.uid + '/Orders/' + props.orderkey + '/openOrClose'] = 'close';
         updateObject['users/' + auth.currentUser.uid + '/portfolio/availableMoney'] = Number(profitorlose.availableMoney) + (Number(props.data.TotalBill) + Number(props.data.ProfitLose));
         updateObject['users/' + auth.currentUser.uid + '/portfolio/InvestedAmount'] = Number(profitorlose.InvestedAmount) - Number(props.data.TotalBill);
@@ -58,7 +58,7 @@ const ListOfOrdersHistory = (props) => {
 
             }
             else {
-                props.data.ordertype!=='buy'?setdiff((props.data?.StartingPrice - lprice).toFixed(2)):setdiff((lprice - props.data?.StartingPrice).toFixed(2))
+                props.data.ordertype !== 'buy' ? setdiff((props.data?.StartingPrice - lprice).toFixed(2)) : setdiff((lprice - props.data?.StartingPrice).toFixed(2))
             }
             const updateobj = {};
             updateobj['users/' + auth.currentUser.uid + '/Orders/' + props.orderkey + '/ProfitLose'] = Number(diff);
@@ -73,19 +73,21 @@ const ListOfOrdersHistory = (props) => {
                         <h2>{props.data?.Symbol}</h2>
                         <p>Start Price : {props.data?.StartingPrice} {props.data.EndingPrice ? ` | End Price : ${props.data.EndingPrice}` : ''}{lprice ? `| Last Price : ${lprice}` : ''}</p>
                     </div>
-                    {
-                        props.data.EndingPrice === undefined ? <>
-                            <div className='OrderHistoryCardDiv1'>
-                                <h2 style={diff > 0 ? { color: 'green' } : { color: 'red' }}>{diff > 0 ? '+' : ''}{diff}</h2>
-                            </div>
-                        </> : <>
-                            <div className='OrderHistoryCardDiv1'>
-                                <h2 style={diff > 0 ? { color: 'green' } : { color: 'red' }}>{Number(props.data?.StartingPrice - props.data.EndingPrice).toFixed(2)}</h2>
-                            </div>
-                        </>
-                    }
-                    <div className="OrderHistoryCardDiv2" style={props.data.ordertype === 'buy' ? { backgroundColor: 'green' } : { backgroundColor: 'red' }}>
-                        <p>{props.data.ordertype}</p>
+                    <div className='inner'>
+                        {
+                            props.data.EndingPrice === undefined ? <>
+                                <div className='OrderHistoryCardDiv1'>
+                                    <h3 style={diff > 0 ? { color: 'green' } : { color: 'red' }}>{diff > 0 ? '+' : ''}{diff}</h3>
+                                </div>
+                            </> : <>
+                                <div className='OrderHistoryCardDiv1'>
+                                    <h3 style={diff > 0 ? { color: 'green' } : { color: 'red' }}>{Number(props.data?.StartingPrice - props.data.EndingPrice).toFixed(2)}</h3>
+                                </div>
+                            </>
+                        }
+                        <div className="OrderHistoryCardDiv2" style={props.data.ordertype === 'buy' ? { backgroundColor: 'darkgreen',color:'white' } : { backgroundColor: 'darkred',color:'white' }}>
+                            <p style={{color:'white',fontWeight:'600'}}>{props.data.ordertype}</p>
+                        </div>
                     </div>
 
                 </div>
