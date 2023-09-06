@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../Css/NewsCards.css'
+import Homenews from './Homenews';
 const NewsStocks = () => {
     const [newsData, setNewsData] = useState([]);
 
@@ -37,25 +38,24 @@ const NewsStocks = () => {
             try {
                 const response = await fetch(url);
                 const result = await response.json();
-                // const newsStream = (JSON.parse(result)).data.main.stream;
-                setNewsData(result.articles)
-                console.log(newsData)
+                setNewsData(result.articles);
             }
             catch (error) {
                 console.error(error);
             }
         };
         fetchNewsData();
-    });
+    },[]);
     // const g = (JSON.parse(result)).data.main.stream
     return (
         <>
-            {newsData?
+            {newsData ?
                 newsData.map((v, index) => {
                     const handle = v
                     return (
                         handle.title ? <>
-                            <a href={v.url} className='LinkNews' key={index}>
+                            <Homenews v={v} index={index}></Homenews>
+                            {/* <a href={v.url} className='LinkNews' key={index}>
                                 <div className="CardsN" key={index + newsData.length}>
                                     <div className="imgNews" key={index + newsData.length + newsData.length}>
                                         <img src={(v?.urlToImage)? v.urlToImage : (e)=>{e.target.style.display = "none  "}}  alt='' key={index + 3 * newsData.length} />
@@ -66,14 +66,14 @@ const NewsStocks = () => {
                                     </div>
 
                                 </div>
-                            </a>
+                            </a> */}
                         </> : ""
                     )
-                }):
+                }) :
                 <>
-                    <div style={{height:'100%',width:'100%',color:'white',display:'flex',alignItems:'center',justifyContent:'center',flexWrap:'wrap'}}>
+                    <div style={{ height: '100%', width: '100%', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap' }}>
                         <h1>Something Went Wrong.
-                            <br/>
+                            <br />
                             No News For Displaying.
                         </h1>
                     </div>

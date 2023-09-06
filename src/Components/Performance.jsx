@@ -6,8 +6,7 @@ import ListOfOrdersHistory from './ListOfOrdersHistory';
 import { onValue, ref } from 'firebase/database';
 import { auth, db } from '../utilities/Firebase';
 const Performance = () => {
-    const [MoneyObj,setMoneyObj] = useState(0)
-    const [orders,setorders] = useState()
+    const [orders, setorders] = useState()
     const splideOptions = {
         arrows: false,
         pagination: false,
@@ -18,11 +17,6 @@ const Performance = () => {
         height: '100%',
         wheel: true,
     };
-    useEffect(()=>{
-        onValue(ref(db,'users/'+auth.currentUser.uid+'/portfolio'),(res)=>{
-            setMoneyObj(res.val())
-        })
-    })
 
     const fetchorders = () => {
         onValue(ref(db, 'users/' + auth.currentUser.uid + '/Orders'), (res) => {
@@ -31,21 +25,21 @@ const Performance = () => {
     }
     useEffect(() => {
         fetchorders();
-    })
-    
+    },[auth.currentUser])
+
     return (
         <div className='ActivePositionsJSXOuter'>
             <div className="ActivePositionsJSXHeader">
                 <h2>Performance</h2>
             </div>
-            <div className="ActivePositionsJSXMoneyBanner">
+            {/* <div className="ActivePositionsJSXMoneyBanner">
                 <div className="PositionsPL">
                     <h3 className='PositionsPLH3'>₹{MoneyObj.positionsPL}</h3>
                     <p className='PositionsPLHP'>Positios P&L</p>
                 </div>
                 <div className="PositionsInvested">
                     <div className="PositionsInvested1">
-                        <h3 className='PositionsPLH3'>₹{MoneyObj.availableMoney}</h3>
+                        <h3 className='PositionsPLH3'>₹{Number(MoneyObj.availableMoney).toFixed(2)}</h3>
                         <p className='PositionsPLHP'>Available Cash</p>
                     </div>
                     <div className="PositionsInvested2">
@@ -58,26 +52,26 @@ const Performance = () => {
                     </div>
 
                 </div>
-            </div>
-            <h2>Completed Trades</h2>
+            </div> */}
+            {/* <h2>Completed Trades</h2> */}
             <div className="OpenOrdersDiv">
                 <Splide options={splideOptions}>
-                {
-                            orders ? <>
-                                <Splide options={splideOptions}>
-                                    {Object.keys(orders).map((data, index) => {
-                                        const t = orders[data].EndingPrice;
-                                        if (t !== undefined) {
-                                            return (
-                                                <SplideSlide key={index}>
-                                                    <ListOfOrdersHistory data={orders[data]} orderkey={data} />
-                                                </SplideSlide>
-                                            );// Skip rendering
-                                        } else {
-                                            return null
-                                        }
-                                    })}
-                                    {/* <SplideSlide>
+                    {
+                        orders ? <>
+                            <Splide options={splideOptions}>
+                                {Object.keys(orders).map((data, index) => {
+                                    const t = orders[data].EndingPrice;
+                                    if (t !== undefined) {
+                                        return (
+                                            <SplideSlide key={index}>
+                                                <ListOfOrdersHistory data={orders[data]} past={true} orderkey={data} />
+                                            </SplideSlide>
+                                        );// Skip rendering
+                                    } else {
+                                        return null
+                                    }
+                                })}
+                                {/* <SplideSlide>
                                     <ListOfOrdersHistory />
                                 </SplideSlide>
                                 <SplideSlide>
@@ -101,9 +95,9 @@ const Performance = () => {
                                 <SplideSlide>
                                     <ListOfOrdersHistory />
                                 </SplideSlide> */}
-                                </Splide>
-                            </> : <><h1>No orders</h1></>
-                        }
+                            </Splide>
+                        </> : <><h1>No orders</h1></>
+                    }
                     {/* <SplideSlide>
                         <ListOfOrdersHistory />
                     </SplideSlide>
@@ -131,7 +125,7 @@ const Performance = () => {
                 </Splide>
             </div>
         </div>
-        
+
     )
 }
 

@@ -13,10 +13,10 @@ const ListOfOrdersHistory = (props) => {
         onValue(ref(db, 'users/' + auth.currentUser.uid + '/portfolio'), (res) => {
             setprofitorlose(res.val())
         })
-        
+
         const updateObject = {};
         updateObject['users/' + auth.currentUser.uid + '/Orders/' + props.orderkey + '/EndingPrice'] = Number(lprice);
-        updateObject['users/' + auth.currentUser.uid + '/portfolio/profitorlose'] = Number(profitorlose.profitorlose) + Number(diff);
+        updateObject['users/' + auth.currentUser.uid + '/portfolio/profitorlose'] = Number(profitorlose.profitorlose?profitorlose.profitorlose:0) + Number(diff);
         updateObject['users/' + auth.currentUser.uid + '/Orders/' + props.orderkey + '/openOrClose'] = 'close';
         updateObject['users/' + auth.currentUser.uid + '/portfolio/availableMoney'] = Number(profitorlose.availableMoney) + (Number(props.data.TotalBill) + Number(props.data.ProfitLose));
         updateObject['users/' + auth.currentUser.uid + '/portfolio/InvestedAmount'] = Number(profitorlose.InvestedAmount) - Number(props.data.TotalBill);
@@ -37,10 +37,12 @@ const ListOfOrdersHistory = (props) => {
     }
 
     useEffect(() => {
-        fetchprice();
-        setInterval(() => {
+        if (props.past === false) {
             fetchprice();
-        }, 5000);
+            setInterval(() => {
+                fetchprice();
+            }, 3000);
+        }
     }, [])
 
     useEffect(() => {
@@ -56,7 +58,7 @@ const ListOfOrdersHistory = (props) => {
 
             }
             else {
-                setdiff((props.data?.StartingPrice - lprice).toFixed(2))
+                props.data.ordertype!=='buy'?setdiff((props.data?.StartingPrice - lprice).toFixed(2)):setdiff((lprice - props.data?.StartingPrice).toFixed(2))
             }
             const updateobj = {};
             updateobj['users/' + auth.currentUser.uid + '/Orders/' + props.orderkey + '/ProfitLose'] = Number(diff);
@@ -78,7 +80,7 @@ const ListOfOrdersHistory = (props) => {
                             </div>
                         </> : <>
                             <div className='OrderHistoryCardDiv1'>
-                                <h2 style={diff > 0 ? { color: 'green' } : { color: 'red' }}>{props.data?.StartingPrice - props.data.EndingPrice}</h2>
+                                <h2 style={diff > 0 ? { color: 'green' } : { color: 'red' }}>{Number(props.data?.StartingPrice - props.data.EndingPrice).toFixed(2)}</h2>
                             </div>
                         </>
                     }
@@ -88,7 +90,7 @@ const ListOfOrdersHistory = (props) => {
 
                 </div>
                 {props.data.EndingPrice === undefined ? <>
-                    <div className="ActiveOrderSellButton" onClick={handleordersell}>
+                    <div className="ActiveOrderSellButton" onClick={() => { handleordersell() }}>
                         Sell
                     </div>
                 </> : ''}

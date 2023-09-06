@@ -204,20 +204,20 @@ html {
     min-width: fit-content !important;
 } */
 
-.splide{
+.splide {
     width: 100% !important;
 }
 
-.splide__list{
+.splide__list {
     gap: 15px !important;
 }
 
-.focusedborderradius{
+.focusedborderradius {
     border-bottom-left-radius: 0px !important;
     border-bottom-right-radius: 0px !important;
 }
 
-.hiddenfilterbar{
+.hiddenfilterbar {
     max-height: 70vh;
     width: 100%;
     position: absolute;
@@ -234,7 +234,7 @@ html {
     overflow-x: hidden;
 }
 
-.hiddenfilterbar>ul{
+.hiddenfilterbar>ul {
     margin: 0 0;
     padding: 0 0;
     height: 100%;
@@ -244,12 +244,12 @@ html {
     overflow: hidden;
 }
 
-.hiddenfilterbar>ul>a{
+.hiddenfilterbar>ul>a {
     text-decoration: none;
 
 }
 
-.hiddenfilterbar>ul>a>li{
+.hiddenfilterbar>ul>a>li {
     box-sizing: border-box;
     color: white;
     margin: 0 0;
@@ -259,6 +259,24 @@ html {
     height: fit-content;
 }
 
-.hiddenfilterbar>ul>a>li:hover{
+.hiddenfilterbar>ul>a>li:hover {
     background-color: rgba(255, 255, 255, 0.144);
+}
+
+@media screen and (max-width:768px) {
+    .optionIndices {
+        width: 100%;
+        color: white;
+        text-align: start;
+        background-color: black;
+        height: 40px;
+        margin: 0px 0px;
+        outline: 1px solid white;
+        border-radius: 10px;
+        border: none;
+        padding: 10px 10px;
+        height: 50px;
+        border: 1px solid white;
+        font-weight: 500;
+    }
 }
