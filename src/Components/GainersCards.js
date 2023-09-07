@@ -234,7 +234,9 @@ const GainersCards = () => {
                 <div className="Card_outer">
                     <div className={`cards_Div ${activeCard === 'ADANIENT' ? 'active' : ''}`} onClick={() => Charthandler('ADANIENT')} id='ADANIENT'>
                         <div className="LogoStock">
-
+                            <img src={`https://unpkg.com/@extra-isin/logos@1.0.0/data/INE423A01024.png`} alt='' style={{ maxHeight: '100%', maxWidth: '100%' }} onError={(e) => {
+                                e.target.style.display = 'none'; // Hide the image on error
+                            }} />
                         </div>
                         <div className="StockDetail">
                             <p className="SymbolStock">ADANIENT</p>
@@ -246,7 +248,7 @@ const GainersCards = () => {
                 <div className="Card_outer">
                     <div className={`cards_Div ${activeCard === 'HDFCBANK' ? 'active' : ''}`} onClick={() => Charthandler('HDFCBANK')} id='HDFCBANK'>
                         <div className="LogoStock">
-
+                           
                         </div>
                         <div className="StockDetail">
                             <p className="SymbolStock">HDFCBANK</p>
@@ -258,7 +260,9 @@ const GainersCards = () => {
                 <div className="Card_outer">
                     <div className={`cards_Div ${activeCard === 'AXISBANK' ? 'active' : ''}`} onClick={() => Charthandler('AXISBANK')} id='AXISBANK'>
                         <div className="LogoStock">
-
+                            <img src={`https://unpkg.com/@extra-isin/logos@1.0.0/data/INE238A01034.png`} alt='' style={{ maxHeight: '100%', maxWidth: '100%' }} onError={(e) => {
+                                e.target.style.display = 'none'; // Hide the image on error
+                            }} />
                         </div>
                         <div className="StockDetail">
                             <p className="SymbolStock">AXISBANK</p>

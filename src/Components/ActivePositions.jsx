@@ -88,6 +88,7 @@ const ActivePositions = () => {
     const fetchingmoneyobj = () => {
         onValue(ref(db, 'users/' + auth.currentUser.uid + '/portfolio'), (res) => {
             setMoneyObj(res.val())
+            console.log(res.val())
         })
     }
 

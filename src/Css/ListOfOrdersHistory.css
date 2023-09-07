@@ -1,8 +1,10 @@
+  @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+
 .OrderHistoryCard{
     box-sizing: border-box;
-    width: 90%;
+    width: 100%;
     min-height: 70px;
-    background-color: #ffffff;
+    background-color: black;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     padding: 0 40px;
@@ -13,19 +15,41 @@
 }
 
 .OrderHistoryCardDiv1>h2{
-    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    display: flex;
+    color: white;
     margin: 0 0;
+    font-family: 'Ubuntu', sans-serif;
 }
 
+.OrderHistoryCardDiv1>h3{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.OrderHistoryCardDiv1>h3::before{
+    content: " ₹";
+    color: violet;
+}
 .OrderHistoryCardDiv1>p{
     margin: 0 0;
     color:  black;
+    font-size: me;
+    font-weight: 500;
+}
+
+.OrderHistoryCardDiv1>h2>div>p{
+    font-weight: 500;
     font-size: small;
 }
 
 .OrderHistoryCardDiv2{
-    height: 80%;
-    width: 100px;
+    height: 10px;
+    width: 50px;
+    font-size: 10px;
     background-color: black;
     border-radius: 10px;
     box-sizing: border-box;
@@ -40,15 +64,19 @@
 }
 
 .ActiveOrderSellButton{
+    border-radius: 10px;
     box-sizing: border-box;
-    padding: 0 40px;
-    width: 90%;
-    padding: 10px 10px;
+    padding: 5px 20px;
     display: flex;
+    cursor: pointer;
     align-items: center;
     font-size: medium;
-    background-color: red;
     justify-content: space-around;
+    border: 1px solid white;
+}
+
+.ActiveOrderSellButton:hover{
+    background-color: rgba(255, 0, 255, 0.335);
 }
 
 .Orderards{
@@ -56,7 +84,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    cursor: pointer;
+    margin-top: 10px;
 }
 
 .inner{
@@ -64,4 +92,43 @@
     align-items: center;
     justify-content: space-around;
     gap: 5px;
+}
+
+.pricebanner{
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 40px;
+}
+
+.pricebanner>p{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.pricebanner>p>div{
+    font-size: medium;
+}
+
+.order{
+    min-width:300px;
+    width: 90%;
+    outline: 1px solid white;
+    border-radius: 10px;
+}
+
+@media screen and (max-width:768px) {
+    .OrderHistoryCard{
+        padding: 0 10px;
+    }
+    .pricebanner{
+        padding: 0 10px;
+    }
+}
+
+@media screen and (max-width:425px) {
+    .inner{
+        flex-direction: column;
+        gap: 3px;
+    }
 }

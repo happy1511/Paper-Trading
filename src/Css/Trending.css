@@ -125,7 +125,7 @@ html {
 
 .MostActiveTrendingPageHeaders {
     color: white;
-
+    
 }
 
 .MostActivePrice {
@@ -144,6 +144,12 @@ html {
     margin-top: 50px;
     align-items: flex-end;
     justify-content: space-around;
+}
+
+.hh{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 
 .SearchIconTrendingPage {

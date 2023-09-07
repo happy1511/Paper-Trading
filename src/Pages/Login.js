@@ -117,6 +117,7 @@ const Login = () => {
           console.log(errorCode)
           console.log(errorMessage)
           setErrorUser(errorMessage)
+          setloading(false)
         });
     }
   }
