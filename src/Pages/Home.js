@@ -25,7 +25,7 @@ const Home = () => {
   useEffect(() => {
     const getalls = async () => {
       await axios.get(process.env.REACT_APP_SERVER_URL + '/getAllSymbols').then((res) => {
-        localStorage.setItem('AllSymbols', res.data);
+         localStorage.setItem('AllSymbols', res.data);
       }).catch((Err) => { console.log(Err) })
     }
     // setTimeout(() => {

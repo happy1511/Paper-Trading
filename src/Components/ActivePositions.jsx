@@ -68,7 +68,7 @@ const ActivePositions = () => {
     const handleQuantityChange = (e) => {
         if (/^\d*$/.test(e.target.value) && e.target.value !== '0') {
             if (e.target.value >= 0) {
-                if (MoneyObj.availableMoney >= (Price * e.target.value).toFixed(2)) {
+                if (Number(MoneyObj.availableMoney) >= (Price * e.target.value).toFixed(2)) {
                     setQuantity(e.target.value)
                     setErrorMsg('')
                     setTotalBill((Price * e.target.value).toFixed(2))
@@ -84,12 +84,24 @@ const ActivePositions = () => {
         }
 
     }
+    const fetchFirebaseDatamoney = () => {
+        return new Promise((resolve, reject) => {
+            onValue(ref(db, 'users/' + auth.currentUser.uid + '/portfolio'), (res) => {
+                if (res.exists()) {
+                    resolve(res.val());
+                } else {
+                    reject(new Error('Portfolio data not found'));
+                }
+            }, (error) => {
+                reject(error);
+            });
+        });
+    };
 
-    const fetchingmoneyobj = () => {
-        onValue(ref(db, 'users/' + auth.currentUser.uid + '/portfolio'), (res) => {
-            setMoneyObj(res.val())
-            console.log(res.val())
-        })
+    const fetchingmoneyobj = async () => {
+        const moneyobjvalue = await fetchFirebaseDatamoney();
+        setMoneyObj(moneyobjvalue)
+        console.log(moneyobjvalue)
     }
 
 
@@ -97,34 +109,37 @@ const ActivePositions = () => {
         fetchingmoneyobj();
         const Interval = setInterval(() => {
             fetchingmoneyobj();
-        }, 5000);
-        return (
-            clearInterval(Interval)
-        )
+        }, 1000);
+       return (
+        clearInterval(Interval)
+       )
     }, [])
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
 
         if (ordertype !== '') {
             e.preventDefault();
             const orderobject = {
-                Symbol: SymbolInput,
-                Quantity: Quantity,
-                TotalBill: TotalBill,
-                ProfitLose: 0,
-                StartingPrice: Price,
+                Symbol: String(SymbolInput),
+                Quantity: String(Quantity),
+                TotalBill: String(TotalBill),
+                ProfitLose: '0',
+                StartingPrice: String(Price),
                 EndingPrice: null,
                 openOrClose: 'open',
-                ordertype: ordertype,
+                ordertype: String(ordertype),
                 timestamp: Date.now().toString()
             }
             console.log(orderobject)
             set(push(ref(db, 'users/' + auth.currentUser.uid + '/Orders')), orderobject)
             const updateobj = {};
-            updateobj['users/' + auth.currentUser.uid + '/portfolio/pastTradedAmount'] = (Number(MoneyObj.pastTradedAmount) + Number(TotalBill)).toFixed(2);
-            updateobj['users/' + auth.currentUser.uid + '/portfolio/InvestedAmount'] = (Number(MoneyObj.InvestedAmount) + Number(TotalBill)).toFixed(2);
-            updateobj['users/' + auth.currentUser.uid + '/portfolio/availableMoney'] = (Number(MoneyObj.availableMoney) - Number(TotalBill)).toFixed(2);
-            update(ref(db), updateobj).then((res) => { console.log('updated') }).catch((err) => { console.log(err) })
+            const uam = String((Number(MoneyObj.availableMoney) - Number(TotalBill)).toFixed(2));
+            const uia = String((Number(MoneyObj.InvestedAmount) + Number(TotalBill)).toFixed(2));
+            const upta = String((Number(MoneyObj.pastTradedAmount) + Number(TotalBill)).toFixed(2));
+            updateobj['users/' + auth.currentUser.uid + '/portfolio/pastTradedAmount'] = upta;
+            updateobj['users/' + auth.currentUser.uid + '/portfolio/InvestedAmount'] = uia;
+            updateobj['users/' + auth.currentUser.uid + '/portfolio/availableMoney'] = uam;
+            await update(ref(db), updateobj).then((res) => { console.log('updated') }).catch((err) => { console.log(err) })
             setAddStock(0)
             fetchorders();
             setSymbolInput('')
@@ -180,19 +195,32 @@ const ActivePositions = () => {
     useEffect(() => {
         fetchorders();
     }, [])
-    const updatePositionPL = () => {
-        if (Orders) {
+    const fetchFirebaseDataorders = () => {
+        return new Promise((resolve, reject) => {
+            onValue(ref(db, 'users/' + auth.currentUser.uid + '/Orders'), (res) => {
+
+                resolve(res.val());
+            }, (error) => {
+                reject(error);
+            });
+        });
+    };
+
+    const updatePositionPL = async () => {
+        const od = await fetchFirebaseDataorders()
+        if (od) {
             var totalPL = 0
-            Object.keys(Orders).map((res) => {
-                const orderd = Orders[res]
+            Object.keys(od).map((res) => {
+                const orderd = od[res]
                 if (orderd.openOrClose === "open") {
                     totalPL = totalPL + orderd.ProfitLose
                 }
             })
 
             const updateobj2 = {}
-            updateobj2['users/' + auth.currentUser.uid + '/portfolio/positionsPL'] = Number((totalPL).toFixed(2))
-            update(ref(db), updateobj2).catch(err => { })
+            const upositionpl = String(Number((totalPL)).toFixed(2))
+            updateobj2['users/' + auth.currentUser.uid + '/portfolio/positionsPL'] = upositionpl
+           await update(ref(db), updateobj2).catch(err => { })
         }
     }
     useEffect(() => {
@@ -295,7 +323,7 @@ const ActivePositions = () => {
                         </div>
                         <div className="ActivePositionsJSXMoneyBanner">
                             <div className="PositionsPL">
-                                <h3 className='PositionsPLH3'>₹{MoneyObj.positionsPL}</h3>
+                                <h3 className='PositionsPLH3'>₹{Number(MoneyObj.positionsPL)}</h3>
                                 <p className='PositionsPLHP'>Positios P&L</p>
                             </div>
                             <div className="PositionsInvested">
@@ -308,7 +336,7 @@ const ActivePositions = () => {
                                     <p className='PositionsPLHP'>Past Traded Amount</p>
                                 </div>
                                 <div className="PositionsInvested3">
-                                    <h3 className='PositionsPLH3'>₹{MoneyObj.InvestedAmount}</h3>
+                                    <h3 className='PositionsPLH3'>₹{Number(MoneyObj.InvestedAmount).toFixed(2)}</h3>
                                     <p className='PositionsPLHP'>Invested Amount</p>
                                 </div>
 
