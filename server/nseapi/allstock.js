@@ -2,7 +2,6 @@
 const { default: axios } = require('axios')
 var { NseIndia } = require('stock-nse-india')
 const nseindia = new NseIndia()
-const cheerio = require('cheerio');
 
 exports.getAllSymbols = () => { // Note the corrected function name here
     return nseindia.getAllStockSymbols()
