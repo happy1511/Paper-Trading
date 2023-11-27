@@ -41,6 +41,7 @@ exports.HistoricalData = (symbol, range) => {
 }
 
 exports.marketstatus = () => {
+    console.log(nseindia.getAllStockSymbols());
     return nseindia.getDataByEndpoint('/api/marketStatus')
 }
 
