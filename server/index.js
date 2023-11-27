@@ -8,6 +8,7 @@ const { mostactive,topgainersandloosers, AllTheIndices, HistoricalData, intraday
 app.use(cors())
 
 app.get('/', async (req, res) => {
+    console.log('/')
     res.json(await marketstatus())
 });
 
