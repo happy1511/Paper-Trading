@@ -8,6 +8,7 @@ import { onValue, push, ref, set, update } from 'firebase/database';
 import { auth, db } from '../utilities/Firebase';
 import { Puff } from 'react-loader-spinner';
 import { equity, marketstatus } from '../modules/FetchingAxios';
+
 const ActivePositions = () => {
     const [SymbolInput, setSymbolInput] = useState('')
     const [Price, setPrice] = useState(0)

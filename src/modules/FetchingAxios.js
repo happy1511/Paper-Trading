@@ -2,37 +2,37 @@
 const { default: axios } = require('axios')
 var { NseIndia } = require('stock-nse-india')
 const nseindia = new NseIndia()
-exports.getAllSymbols = () => { // Note the corrected function name here
+export const getAllSymbols = () => { // Note the corrected function name here
     return nseindia.getAllStockSymbols()
 }
-exports.getEquityHistoricalData = () => {
+export  const getEquityHistoricalData = () => {
     return nseindia.getEquityStockIndices('NIFTY50')
 }
 
 
-exports.equity = (symbol) => {
+export  const equity = (symbol) => {
     return nseindia.getEquityDetails(symbol)
 }
 
 
-exports.intraday = (symbol) => {
+export  const intraday = (symbol) => {
     return nseindia.getEquityIntradayData(symbol, false)
 }
 
-exports.HistoricalData = (symbol, range) => {
+export  const HistoricalData = (symbol, range) => {
     return nseindia.getEquityHistoricalData(symbol, range)
 }
 
-exports.marketstatus = () => {
+export const marketstatus = () => {
     console.log(nseindia.getAllStockSymbols());
     return nseindia.getDataByEndpoint('/api/marketStatus')
 }
 
-exports.AllTheIndices = () => {
+export  const AllTheIndices = () => {
     return nseindia.getDataByEndpoint('/api/allIndices')
 }
 
-exports.topgainersandloosers =async (indexSymbol) => {
+export  const topgainersandloosers =async (indexSymbol) => {
     const indexData = await nseindia.getEquityStockIndices(indexSymbol);
     const gainers = [];
     const losers = [];
@@ -48,7 +48,7 @@ exports.topgainersandloosers =async (indexSymbol) => {
     };
 }
 
-exports.mostactive = async (indexSymbol) => {
+export  const mostactive = async (indexSymbol) => {
     const indexData = await nseindia.getEquityStockIndices(indexSymbol);
     return {
         byVolume: [...indexData.data].sort((a, b) => b.totalTradedVolume - a.totalTradedVolume),
