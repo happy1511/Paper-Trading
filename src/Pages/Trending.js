@@ -8,6 +8,7 @@ import MostActiveTrendingPage from "../Components/MostActiveTrendingPage";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css/core";
 import { Puff } from "react-loader-spinner";
+import { AllTheIndices, mostactive, topgainersandloosers } from "../modules/FetchingAxios";
 
 const Trending = () => {
   const [selectedindices, setselectedindices] = useState("nifty 50");
@@ -39,8 +40,7 @@ const Trending = () => {
   }
   const fetchindices = () => {
     const url = `${process.env.REACT_APP_SERVER_URL}/Allindices`;
-    axios
-      .get(url)
+    AllTheIndices()
       .then((res) => {
         setAllindices(res.data.data);
         setselectedindices(res.data.data[0].indexSymbol);
@@ -54,8 +54,7 @@ const Trending = () => {
     const url = ` ${
       process.env.REACT_APP_SERVER_URL
     }/mostactive/${selectedindices.toLowerCase()}`;
-    axios
-      .get(url)
+    mostactive(selectedindices.toLowerCase())
       .then((res) => {
         setbyVolume(res.data.byVolume);
         setbyValue(res.data.byValue);
@@ -70,8 +69,7 @@ const Trending = () => {
     const surl = `${
       process.env.REACT_APP_SERVER_URL
     }/gainersandLoosers/${selectedIndicesTopGL.toLowerCase()}`;
-    axios
-      .get(surl)
+    topgainersandloosers(selectedIndicesTopGL.toLowerCase())
       .then((res) => {
         setgainers(res.data.gainers);
         setLoosers(res.data.losers);
@@ -95,13 +93,12 @@ const Trending = () => {
     setInterval(() => {
       fetchselected();
       fetchGL();
-      
     }, 5000);
   }, []);
 
   useEffect(() => {
     setallsym(localStorage.getItem("AllSymbols").split(","));
-  },[]);
+  }, []);
 
   useEffect(() => {
     fetchselected();

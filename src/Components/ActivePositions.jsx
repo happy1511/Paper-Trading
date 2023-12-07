@@ -4,10 +4,10 @@ import ListOfOrdersHistory from './ListOfOrdersHistory';
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css/core';
 import '../Css/AddStock.css'
-import axios from 'axios';
 import { onValue, push, ref, set, update } from 'firebase/database';
 import { auth, db } from '../utilities/Firebase';
 import { Puff } from 'react-loader-spinner';
+import { equity, marketstatus } from '../modules/FetchingAxios';
 const ActivePositions = () => {
     const [SymbolInput, setSymbolInput] = useState('')
     const [Price, setPrice] = useState(0)
@@ -51,8 +51,7 @@ const ActivePositions = () => {
 
 
     const fetchpriceselected = (Selecteditem) => {
-        const url = `${process.env.REACT_APP_SERVER_URL}/equity/${Selecteditem}`
-        axios.get(url).then((res) => {
+        equity(Selecteditem).then((res) => {
             console.log(res)
             setPrice(res.data.priceInfo.lastPrice)
         }).catch((err) => console.log(err))
@@ -234,7 +233,7 @@ const ActivePositions = () => {
     })
     const handleAddstockNew = async () => {
         try {
-            const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}`)
+            const response = await marketstatus()
             if (response.data.marketState[0].marketStatus === "Open") {
                 setPrice(0)
                 setTotalBill(0)

@@ -7,6 +7,7 @@ import ChartR from "../Components/ChartR";
 import axios from "axios";
 import { Puff } from "react-loader-spinner";
 import ErrorPage from "./error";
+import { equity, marketstatus } from "../modules/FetchingAxios";
 
 const StockDataWithChart = () => {
   const { Symbol } = useParams();
@@ -17,9 +18,7 @@ const StockDataWithChart = () => {
   const [errormsg, seterrormsg] = useState(false);
   const fetchSymbolData = async () => {
     try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}/equity/${Symbol}`
-      );
+      const response = await equity(Symbol)
       setSymboldata(response.data);
     } catch (error) {
       console.log(error);
@@ -31,7 +30,7 @@ const StockDataWithChart = () => {
   }, [Symboldata]);
   const FetchMarketStatus = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}`);
+      const response = await marketstatus();
       console.log(response);
       response.data.marketState[0].marketStatus === "Closed" ||
       response.data.marketState[0].marketStatus === "Close"

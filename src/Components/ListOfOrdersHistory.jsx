@@ -3,6 +3,7 @@ import "../Css/ListOfOrdersHistory.css";
 import axios from "axios";
 import { onValue, ref, update } from "firebase/database";
 import { auth, db } from "../utilities/Firebase";
+import { equity, marketstatus } from "../modules/FetchingAxios";
 
 const ListOfOrdersHistory = (props) => {
   const [lprice, setlprice] = useState(0);
@@ -99,7 +100,7 @@ const ListOfOrdersHistory = (props) => {
 
   const fetchmarketstatus = async () => {
     try {
-      const res = await axios.get(`${process.env.REACT_APP_SERVER_URL}`);
+      const res = await marketstatus()
       seta(res.data.marketState[0].marketStatus !== "Closed");
     } catch (err) {
       console.log(err);
@@ -108,9 +109,7 @@ const ListOfOrdersHistory = (props) => {
 
   const fetchprice = async () => {
     try {
-      const res = await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}/equity/${props.data.Symbol}`
-      );
+      const res = await equity(props.data.Symbol)
       const lastprice = res.data;
       setresponsesymbol(lastprice);
     } catch (err) {
