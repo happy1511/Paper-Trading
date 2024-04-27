@@ -1,42 +1,41 @@
-import React, { useEffect, useState } from "react";
-import "../Css/Home.css";
+import React from "react";
+import { Puff, TailSpin } from "react-loader-spinner";
+import { getAllSymbols } from "../modules/FetchingAxios";
+
 import Investing_has from "./Investing_has.png";
 import Nave_been from "./Never_Been.png";
 import Easy from "./Easy.png";
-import "../Css/HomeSection2.css";
-import "../Css/HomeSection3.css";
-import "../Css/HomeSection4.css";
-import "../Css/HomeSection5.css";
 import Video from "../Img_videos/Video.mp4";
+
 import GainersCards from "../Components/GainersCards";
 import NewsStocks from "../Components/NewsStocks";
 import Footer from "../Components/Footer";
 import Header from "../Components/Header";
 import TrendingMarkets from "../Components/TrendingMarkets";
-import { Puff, TailSpin } from "react-loader-spinner";
-import { getAllSymbols } from "../modules/FetchingAxios";
+
+import "../Css/Home.css";
+import "../Css/HomeSection2.css";
+import "../Css/HomeSection3.css";
+import "../Css/HomeSection4.css";
+import "../Css/HomeSection5.css";
 
 const Home = () => {
-  const [inputvalue, setinputalue] = useState("");
-  const [allsy, setallsy] = useState([]);
-  const [filtered, setfiltered] = useState([]);
-  const [focus, setfocus] = useState(false);
-  useEffect(() => {
+  const [inputvalue, setinputalue] = React.useState("");
+  const [allsy, setallsy] = React.useState([]);
+  const [filtered, setfiltered] = React.useState([]);
+  const [focus, setfocus] = React.useState(false);
+  React.useEffect(() => {
     const getalls = async () => {
       await getAllSymbols()
         .then((res) => {
-          console.log(res,'allsymbols');
           localStorage.setItem("AllSymbols", res.data);
+          setallsy(res.data);
         })
         .catch((Err) => {
           console.log(Err);
         });
     };
-    // setTimeout(() => {
     getalls();
-    setallsy(localStorage.getItem("AllSymbols").split(","));
-
-    // }, 5000);
   }, []);
 
   const handleinput = (e) => {
@@ -62,6 +61,7 @@ const Home = () => {
       setinputalue("");
     }
   };
+
   return allsy.length !== 0 ? (
     <>
       <Header />

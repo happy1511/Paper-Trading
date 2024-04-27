@@ -1,57 +1,37 @@
-// ./nseapi/allstock.js
-const { default: axios } = require('axios')
-var { NseIndia } = require('stock-nse-india')
-const nseindia = new NseIndia()
-export const getAllSymbols = () => { // Note the corrected function name here
-    return nseindia.getAllStockSymbols()
-}
-export  const getEquityHistoricalData = () => {
-    return nseindia.getEquityStockIndices('NIFTY50')
-}
+import axios from "axios";
 
+const API_URL = "https://stock-wpir.vercel.app";
 
-export  const equity = (symbol) => {
-    return nseindia.getEquityDetails(symbol)
-}
+export const getAllSymbols = () => {
+  return axios.get(API_URL + "/getAllSymbols");
+};
 
+export const equity = (symbol) => {
+  return axios.get(API_URL + `/equity/${symbol}`);
+};
 
-export  const intraday = (symbol) => {
-    return nseindia.getEquityIntradayData(symbol, false)
-}
+export const intraday = (symbol) => {
+  return axios.get(API_URL + `/intraday/${symbol}`);
+};
 
-export  const HistoricalData = (symbol, range) => {
-    return nseindia.getEquityHistoricalData(symbol, range)
-}
+export const HistoricalData = (symbol, range) => {
+  return axios.get(
+    API_URL + `/historical/${symbol}/${range.start}/${range.end}`
+  );
+};
 
 export const marketstatus = () => {
-    console.log(nseindia.getAllStockSymbols());
-    return nseindia.getDataByEndpoint('/api/marketStatus')
-}
+  return axios.get(API_URL);
+};
 
-export  const AllTheIndices = () => {
-    return nseindia.getDataByEndpoint('/api/allIndices')
-}
+export const AllTheIndices = () => {
+  return axios.get(API_URL + "/Allindices");
+};
 
-export  const topgainersandloosers =async (indexSymbol) => {
-    const indexData = await nseindia.getEquityStockIndices(indexSymbol);
-    const gainers = [];
-    const losers = [];
-    indexData.data.forEach((equityInfo) => {
-        if (equityInfo.pChange > 0)
-            gainers.push(equityInfo);
-        else
-            losers.push(equityInfo);
-    });
-    return {
-        gainers: [...gainers].sort((a, b) => b.pChange - a.pChange),
-        losers: [...losers].sort((a, b) => a.pChange - b.pChange)
-    };
-}
+export const topgainersandloosers = async (indexSymbol) => {
+  return axios.get(API_URL + `/gainersandLoosers/${indexSymbol}`);
+};
 
-export  const mostactive = async (indexSymbol) => {
-    const indexData = await nseindia.getEquityStockIndices(indexSymbol);
-    return {
-        byVolume: [...indexData.data].sort((a, b) => b.totalTradedVolume - a.totalTradedVolume),
-        byValue: [...indexData.data].sort((a, b) => b.totalTradedValue - a.totalTradedValue)
-    };
-}
+export const mostactive = async (indexSymbol) => {
+  return axios.get(API_URL + `/mostactive/${indexSymbol}`);
+};
