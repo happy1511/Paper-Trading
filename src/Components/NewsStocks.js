@@ -36,7 +36,7 @@ const NewsStocks = () => {
             const url = `${process.env.REACT_APP_SERVER_URL}/news`;
 
             try {
-                const response = await fetch(url);
+                const response = await fetch("https://newlearnearn.vercel.app/news");
                 const result = await response.json();
                 setNewsData(result.articles);
             }
