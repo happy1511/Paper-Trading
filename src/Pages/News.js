@@ -13,7 +13,7 @@ const News = () => {
       const url = `${process.env.REACT_APP_SERVER_URL}/news`;
 
       try {
-        const response = await fetch(url);
+        const response = await fetch("https://newlearnearn.vercel.app/news");
         const result = await response.json();
         // const newsStream = (JSON.parse(result)).data.main.stream;
         setDataNews(result.articles)
