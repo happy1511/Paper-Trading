@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://stock-wpir.vercel.app";
+const API_URL = "https://newlearnearn.vercel.app";
 
 export const getAllSymbols = () => {
   return axios.get(API_URL + "/getAllSymbols");
