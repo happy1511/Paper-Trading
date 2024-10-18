@@ -1,8 +1,7 @@
 // ./nseapi/allstock.js
 const { default: axios } = require("axios");
-var { NseIndia } = require("stock-nse-india");
-const nseindia = new NseIndia();
-
+const Nseindia = require("./nse.js");
+const nseindia = new Nseindia();
 exports.getAllSymbols = () => {
   return nseindia.getAllStockSymbols();
 };

@@ -17,7 +17,7 @@ const {
 } = require("./nseapi/allstock");
 
 app.use(cors());
-const url = "https://www.nseindia.com/";
+
 app.get("/", async (req, res) => {
   res.json(await marketstatus());
 });
