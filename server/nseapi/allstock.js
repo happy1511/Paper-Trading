@@ -4,8 +4,6 @@ var { NseIndia } = require("stock-nse-india");
 const nseindia = new NseIndia();
 
 exports.getAllSymbols = () => {
-  // Note the corrected function name here
-  console.log(nseindia.getAllStockSymbols());
   return nseindia.getAllStockSymbols();
 };
 exports.getEquityHistoricalData = () => {

@@ -19,9 +19,7 @@ const {
 app.use(cors());
 const url = "https://www.nseindia.com/";
 app.get("/", async (req, res) => {
-  const response = await fetch(url + "api/marketStatus");
-  console.log(await response.json());
-  res.json(await response.json());
+  res.json(await marketstatus());
 });
 
 app.get("/getAllSymbols", async (req, res) => {
